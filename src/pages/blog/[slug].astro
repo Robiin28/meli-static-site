@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/astro/PageHero.astro";
+import { posts } from "../../data/blog.js";
+
+export async function getStaticPaths() {
+  return posts.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = posts.find((p) => p.slug === slug);
+if (!post) throw new Error(`Post not found: ${slug}`);
+---
+
+<BaseLayout title={post.title} description={post.excerpt}>
+  <PageHero
+    badge={post.date}
+    title={post.title}
+    subtitle={post.excerpt}
+    ctaHref="/blog"
+    ctaLabel="Back to Blog"
+  />
+
+  <section class="bg-white">
+    <div class="container mx-auto px-4 py-12 md:py-16 lg:py-20">
+      <div class="grid gap-10 lg:grid-cols-3">
+        <article class="lg:col-span-2">
+          <div class="rounded-3xl bg-slate-50 p-7 md:p-10 ring-1 ring-slate-200">
+            <div class="proseish">
+              {post.content.map((para) => (
+                <p>{para}</p>
+              ))}
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="/blog"
+              class="no-underline rounded-2xl bg-slate-100 px-6 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200"
+            >
+              ← Back to Blog
+            </a>
+            <a
+              href="/process"
+              class="no-underline rounded-2xl bg-slate-100 px-6 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200"
+            >
+              View Process
+            </a>
+          </div>
+        </article>
+
+        <aside class="grid gap-6">
+          <div class="rounded-3xl bg-brand-navy p-8 text-white shadow-soft">
+            <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs ring-1 ring-white/20">
+              <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+              Need help?
+            </div>
+            <h3 class="mt-4 text-lg font-extrabold">Get a checklist</h3>
+            <p class="mt-2 text-sm text-white/80">
+              Tell us destination + role. We’ll reply with requirements and steps.
+            </p>
+            <div class="mt-6 grid gap-3">
+              <a
+                href="/contact"
+                class="no-underline text-center rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+              >
+                Contact Us
+              </a>
+              <a
+                href="/services"
+                class="no-underline text-center rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
+              >
+                Services
+              </a>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-white p-8 ring-1 ring-slate-200 shadow-soft">
+            <h4 class="text-sm font-extrabold text-slate-900">Note</h4>
+            <p class="mt-2 text-sm text-slate-600">
+              Requirements vary by destination and employer. Always confirm before submitting documents.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

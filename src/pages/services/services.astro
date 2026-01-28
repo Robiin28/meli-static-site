@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="All Services" description="Service overview page.">
+  <section class="bg-white">
+    <div class="container mx-auto px-4 py-24 max-w-3xl">
+      <h1 class="text-3xl font-extrabold text-slate-900">
+        Services Overview
+      </h1>
+
+      <p class="mt-4 text-slate-600">
+        This page exists at <strong>/services/services</strong>.
+        You can repurpose or remove it later.
+      </p>
+
+      <div class="mt-10 rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-200">
+        <p class="text-sm text-slate-600">
+          Recommended: keep <code>index.astro</code> as your main services page
+          and use <code>[slug].astro</code> for service details.
+        </p>
+      </div>
+
+      <div class="mt-8">
+        <a
+          href="/services"
+          class="no-underline inline-block rounded-2xl bg-brand-navy px-6 py-3 font-semibold text-white hover:opacity-95"
+        >
+          Go to main Services page
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/astro/PageHero.astro";
+---
+
+<BaseLayout title="Privacy" description="Privacy policy placeholder.">
+  <PageHero
+    badge="Legal"
+    title="Privacy Policy"
+    subtitle="Replace this placeholder with your official privacy policy."
+    ctaHref="/contact"
+    ctaLabel="Contact Us"
+  />
+
+  <section class="bg-white">
+    <div class="container mx-auto px-4 py-20 max-w-3xl">
+      <div class="rounded-3xl bg-slate-50 p-8 ring-1 ring-slate-200">
+        <p class="text-slate-700 leading-7">
+          This is a placeholder privacy policy page. Add your official policy text here.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

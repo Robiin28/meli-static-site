@@ -1,0 +1,39 @@
+---
+const { badge = "", title = "", subtitle = "", ctaHref = "", ctaLabel = "" } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-brand-navy text-white">
+  <div class="pointer-events-none absolute inset-0 opacity-[0.06]">
+    <div class="absolute -top-28 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-white blur-3xl"></div>
+  </div>
+
+  <div class="container mx-auto px-4 py-14 md:py-16 lg:py-20 relative">
+    {badge && (
+      <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs ring-1 ring-white/20">
+        <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+        {badge}
+      </div>
+    )}
+
+    <h1 class="mt-5 max-w-3xl text-3xl font-extrabold tracking-tight md:text-5xl">
+      {title}
+    </h1>
+
+    {subtitle && (
+      <p class="mt-4 max-w-2xl text-base text-white/80 md:text-lg">
+        {subtitle}
+      </p>
+    )}
+
+    {ctaHref && ctaLabel && (
+      <div class="mt-7">
+        <a
+          href={ctaHref}
+          class="no-underline inline-flex items-center justify-center rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+        >
+          {ctaLabel}
+        </a>
+      </div>
+    )}
+  </div>
+</section>

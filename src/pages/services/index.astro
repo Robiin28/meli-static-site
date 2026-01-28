@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/astro/PageHero.astro";
+import Card from "../../components/astro/Card.astro";
+import { services } from "../../data/services.js";
+---
+
+<BaseLayout title="Services" description="Recruitment and foreign employment services for employers and candidates.">
+  <PageHero
+    badge="What we do"
+    title="Our Services"
+    subtitle="End-to-end recruitment, documentation, compliance, readiness, and deployment support."
+    ctaHref="/contact"
+    ctaLabel="Contact Us"
+  />
+
+  <section class="bg-slate-50 section-pad">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl">
+        <h2 class="text-xl md:text-2xl section-title text-slate-900">Browse services</h2>
+        <p class="mt-2 text-sm md:text-base section-sub">
+          Click a service to see highlights and typical steps.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {services.map((s) => (
+          <a href={`/services/${s.slug}`} class="no-underline block h-full">
+            <Card eyebrow={s.category} title={s.title} text={s.short} icon={s.icon}>
+              <div class="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-brand-navy">
+                View details <span aria-hidden="true">→</span>
+              </div>
+            </Card>
+          </a>
+        ))}
+      </div>
+
+      <div class="mt-12 md:mt-16 rounded-3xl bg-brand-navy p-8 md:p-10 text-white shadow-soft">
+        <h3 class="text-xl md:text-2xl font-extrabold">Need a custom plan?</h3>
+        <p class="mt-3 max-w-2xl text-white/80">
+          Tell us your destination, role type, and timeline. We’ll respond with a clear checklist.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/contact"
+            class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+          >
+            Contact Us
+          </a>
+          <a
+            href="/process"
+            class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
+          >
+            Recruitment Process
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

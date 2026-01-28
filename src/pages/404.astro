@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404" description="Page not found.">
+  <section class="bg-slate-50">
+    <div class="container mx-auto px-4 py-14 md:py-16 lg:py-24">
+      <div class="mx-auto max-w-2xl rounded-3xl bg-white p-8 md:p-10 shadow-soft ring-1 ring-slate-200 text-center">
+        <div class="inline-flex items-center gap-2 rounded-full bg-brand-navy/5 px-3 py-1 text-xs font-bold text-brand-navy ring-1 ring-brand-navy/10">
+          404
+        </div>
+
+        <h1 class="mt-5 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
+          Page not found
+        </h1>
+
+        <p class="mt-4 text-slate-600">
+          The link may be broken or the page was moved. Try one of these:
+        </p>
+
+        <div class="mt-8 grid gap-3 sm:grid-cols-2">
+          <a class="no-underline rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200" href="/">
+            Home
+          </a>
+          <a class="no-underline rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200" href="/services">
+            Services
+          </a>
+          <a class="no-underline rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200" href="/process">
+            Process
+          </a>
+          <a class="no-underline rounded-2xl bg-brand-navy px-5 py-3 font-extrabold text-white hover:opacity-95" href="/contact">
+            Contact
+          </a>
+        </div>
+
+        <p class="mt-8 text-xs text-slate-500">
+          Tip: Check the address bar for spelling.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

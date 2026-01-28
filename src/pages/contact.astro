@@ -1,0 +1,80 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/astro/ContactForm.astro";
+---
+
+<BaseLayout title="Contact" description="Contact Meli Private Employment Agency for recruitment or overseas job placement.">
+  <section class="bg-slate-50">
+    <div class="container mx-auto px-4 py-12 md:py-16 lg:py-20">
+      <!-- Header -->
+      <div class="rounded-3xl bg-brand-navy p-8 md:p-10 text-white shadow-soft">
+        <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs ring-1 ring-white/20">
+          <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+          Contact
+        </div>
+
+        <h1 class="mt-5 text-3xl md:text-4xl font-extrabold tracking-tight">
+          Talk to our team
+        </h1>
+
+        <p class="mt-4 max-w-2xl text-white/80 md:text-lg">
+          Send a message and we’ll respond with next steps and required details.
+        </p>
+      </div>
+
+      <!-- Content -->
+      <div class="mt-8 lg:mt-10 grid gap-8 lg:grid-cols-2">
+        <!-- Form -->
+        <div class="rounded-3xl bg-white p-6 md:p-8 shadow-soft ring-1 ring-slate-200">
+          <h2 class="text-xl font-extrabold text-slate-900">Send a message</h2>
+          <p class="mt-2 text-sm text-slate-600">
+            Share destination, role type, and timeline for faster support.
+          </p>
+
+          <div class="mt-6">
+            <ContactForm />
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="grid gap-6">
+          <div class="rounded-3xl bg-white p-6 md:p-8 shadow-soft ring-1 ring-slate-200">
+            <h2 class="text-xl font-extrabold text-slate-900">Contact details</h2>
+            <p class="mt-2 text-sm text-slate-600">
+              Replace placeholders with your real office info.
+            </p>
+
+            <div class="mt-6 grid gap-4">
+              <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+                <div class="text-xs text-slate-500">Email</div>
+                <div class="mt-1 font-bold text-slate-900">info@meli-agency.com</div>
+              </div>
+
+              <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+                <div class="text-xs text-slate-500">Phone</div>
+                <div class="mt-1 font-bold text-slate-900">+251 9XX XXX XXX</div>
+              </div>
+
+              <div class="rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200">
+                <div class="text-xs text-slate-500">Office</div>
+                <div class="mt-1 font-bold text-slate-900">Addis Ababa, Ethiopia</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-brand-navy p-8 text-white shadow-soft">
+            <h3 class="text-lg font-extrabold">Fast checklist</h3>
+            <p class="mt-2 text-sm text-white/80">
+              Include these 3 items in your message:
+            </p>
+            <ul class="mt-4 grid gap-2 text-sm text-white/85">
+              <li class="rounded-2xl bg-white/10 p-3 ring-1 ring-white/15">Destination country</li>
+              <li class="rounded-2xl bg-white/10 p-3 ring-1 ring-white/15">Job role / sector</li>
+              <li class="rounded-2xl bg-white/10 p-3 ring-1 ring-white/15">Timeline / urgency</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

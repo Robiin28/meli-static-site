@@ -1,0 +1,19 @@
+---
+const { badge = "Section", title = "Title", subtitle = "" } = Astro.props;
+---
+
+<div class="max-w-2xl">
+  <div class="inline-flex items-center gap-2 rounded-full bg-brand-navy/5 px-3 py-1 text-xs font-medium text-brand-navy ring-1 ring-brand-navy/10">
+    {badge}
+  </div>
+
+  <h2 class="mt-4 text-3xl font-extrabold tracking-tight md:text-4xl">
+    {title}
+  </h2>
+
+  {subtitle && (
+    <p class="mt-4 text-slate-600">
+      {subtitle}
+    </p>
+  )}
+</div>

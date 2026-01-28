@@ -1,0 +1,112 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/astro/PageHero.astro";
+import Card from "../components/astro/Card.astro";
+import FAQ from "../components/astro/FAQ.astro";
+
+const faqItems = [
+  {
+    q: "How long does the recruitment process take?",
+    a: "Time depends on destination requirements and approvals. After reviewing your case, we provide an estimated timeline and checklist.",
+  },
+  {
+    q: "Do you help with documentation?",
+    a: "Yes. We guide and manage the documentation workflow, including authentication and required submissions based on your destination.",
+  },
+  {
+    q: "Do candidates need medical checks?",
+    a: "Often yes, depending on destination and job role. We guide candidates through the required medical process and readiness steps.",
+  },
+];
+---
+
+<BaseLayout title="Process" description="Our compliant, step-by-step recruitment pipeline.">
+  <PageHero
+    badge="Pipeline"
+    title="Recruitment Process"
+    subtitle="Transparent steps designed to ensure compliance, safety, and successful deployment."
+    ctaHref="/contact"
+    ctaLabel="Start a Request"
+  />
+
+  <section class="bg-slate-50">
+    <div class="container mx-auto px-4 py-12 md:py-16 lg:py-20">
+      <!-- Steps -->
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <Card
+          eyebrow="Step 01"
+          title="Contract & Documentation"
+          text="Confirm requirements, prepare candidate files, and organize documents for processing."
+        />
+        <Card
+          eyebrow="Step 02"
+          title="Authentication & Licensing"
+          text="Authorities review and authenticate documents for legal compliance and approvals."
+        />
+        <Card
+          eyebrow="Step 03"
+          title="Screening & Medical"
+          text="Interviews, verification, and readiness steps (including medical when required)."
+        />
+        <Card
+          eyebrow="Step 04"
+          title="Travel & Deployment"
+          text="Final briefing, travel coordination, and deployment support for smooth onboarding."
+        />
+      </div>
+
+      <!-- Pipeline hint (keeps your original “code/pipeline” identity) -->
+      <div class="mt-10 md:mt-12 rounded-3xl bg-white p-7 md:p-10 ring-1 ring-slate-200 shadow-soft">
+        <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900">Pipeline view</h2>
+            <p class="mt-2 text-sm text-slate-600">
+              A quick look at typical steps we manage end-to-end.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            {["contract","auth","license","screen","medical","qr","travel"].map((t) => (
+              <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-extrabold text-slate-700 ring-1 ring-slate-200">
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="mt-10 md:mt-12 rounded-3xl bg-white p-7 md:p-10 ring-1 ring-slate-200 shadow-soft">
+        <h2 class="text-xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+        <p class="mt-2 text-sm text-slate-600">
+          Quick answers to common questions about our recruitment workflow.
+        </p>
+        <FAQ items={faqItems} />
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-10 md:mt-12 rounded-3xl bg-brand-navy p-8 md:p-10 text-white shadow-soft">
+        <h3 class="text-xl md:text-2xl font-extrabold">
+          Want a checklist tailored to your destination?
+        </h3>
+        <p class="mt-3 max-w-2xl text-white/80">
+          Send destination + role + timeline. We’ll reply with required steps and documents.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/contact"
+            class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+          >
+            Contact Us
+          </a>
+          <a
+            href="/services"
+            class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
+          >
+            Browse Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

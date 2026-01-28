@@ -1,0 +1,43 @@
+---
+import HeroCursor from "../react/HeroCursor";
+---
+
+<section class="relative overflow-hidden bg-brand-navy text-white">
+  <!-- Code glow background: static, low opacity, almost free performance -->
+  <div class="pointer-events-none absolute inset-0 opacity-[0.07] blur-[0.2px]">
+    <pre class="absolute -top-10 left-1/2 w-245 -translate-x-1/2 text-[10px] leading-4 text-white">
+{`const pipeline = ["contract","auth","license","screen","medical","qr","travel"];
+export const recruit = async (candidate) => pipeline.map(step => ({ step, ok: true }));`}
+    </pre>
+  </div>
+
+  <div class="container mx-auto px-4 py-20 relative">
+    <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs ring-1 ring-white/20">
+      <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+      Foreign Employment & Recruitment
+    </div>
+
+    <h1 class="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl">
+      Meli Private Employment Agency
+    </h1>
+
+    <p class="mt-4 max-w-2xl text-lg text-white/80 md:text-xl">
+      We create jobs; we create careers<span class="inline-block"><HeroCursor client:load /></span>
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a
+        href="/services"
+        class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-semibold text-slate-900 shadow-soft hover:opacity-95"
+      >
+        Explore Services
+      </a>
+      <a
+        href="/process"
+        class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
+      >
+        Recruitment Process
+      </a>
+    </div>
+  </div>
+</section>

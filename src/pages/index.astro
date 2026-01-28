@@ -1,0 +1,174 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroCursor from "../components/react/HeroCursor";
+
+import Card from "../components/astro/Card.astro";
+import Stat from "../components/astro/Stat.astro";
+
+import { services } from "../data/services.js";
+import { posts } from "../data/blog.js";
+
+const topServices = services.slice(0, 3);
+const latestPosts = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 3);
+---
+
+<BaseLayout title="Home" description="Meli Private Employment Agency provides foreign employment and recruitment services across multiple sectors.">
+  <!-- HERO (UNCHANGED) -->
+  <section class="relative overflow-hidden bg-brand-navy text-white">
+    <!-- Code glow background: static, low opacity, almost free performance -->
+    <div class="pointer-events-none absolute inset-0 opacity-[0.07] blur-[0.2px]">
+      <pre class="absolute -top-10 left-1/2 w-245 -translate-x-1/2 text-[10px] leading-4 text-white">
+{`const pipeline = ["contract","auth","license","screen","medical","qr","travel"];
+export const recruit = async (candidate) => pipeline.map(step => ({ step, ok: true }));`}
+      </pre>
+    </div>
+
+    <div class="container mx-auto px-4 py-20 relative">
+      <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs ring-1 ring-white/20">
+        <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+        Foreign Employment & Recruitment
+      </div>
+
+      <h1 class="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl">
+        Meli Private Employment Agency
+      </h1>
+
+      <p class="mt-4 max-w-2xl text-lg text-white/80 md:text-xl">
+        We create jobs; we create careers
+        <span class="inline-block"><HeroCursor client:load /></span>
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-4">
+        <a
+          href="/services"
+          class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-semibold text-slate-900 shadow-soft hover:opacity-95"
+        >
+          Explore Services
+        </a>
+        <a
+          href="/process"
+          class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
+        >
+          Recruitment Process
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US (BM-like clarity, but your brand) -->
+  <section class="bg-white section-pad">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 rounded-full bg-brand-navy/5 px-3 py-1 text-xs font-extrabold text-brand-navy ring-1 ring-brand-navy/10">
+          Why choose us
+        </div>
+        <h2 class="mt-4 text-2xl md:text-3xl section-title text-slate-900">
+          Compliance, support, and successful deployment
+        </h2>
+        <p class="mt-3 section-sub">
+          We keep the process clear and structured so employers and candidates always know the next step.
+        </p>
+      </div>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <Card
+          icon="shield"
+          eyebrow="Pillar 01"
+          title="Compliance & Transparency"
+          text="Structured workflow, clear checklists, and step-by-step guidance aligned with destination requirements."
+        />
+        <Card
+          icon="headset"
+          eyebrow="Pillar 02"
+          title="Dedicated Support"
+          text="We guide employers and candidates through documentation, screening, and readiness with consistent communication."
+        />
+        <Card
+          icon="plane"
+          eyebrow="Pillar 03"
+          title="Deployment Focus"
+          text="Final briefings, travel coordination, and practical preparation so placements succeed."
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="bg-slate-50 section-pad">
+    <div class="container mx-auto px-4">
+      <div class="grid gap-6 md:grid-cols-3">
+        <Stat value="Process-led" label="Clear steps from start to deployment" />
+        <Stat value="Compliance" label="Structured documentation workflow" />
+        <Stat value="Support" label="Employers and candidates guided" />
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section class="bg-white section-pad">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+        <div class="max-w-2xl">
+          <div class="inline-flex items-center gap-2 rounded-full bg-brand-navy/5 px-3 py-1 text-xs font-extrabold text-brand-navy ring-1 ring-brand-navy/10">
+            Services
+          </div>
+          <h2 class="mt-4 text-2xl md:text-3xl section-title text-slate-900">
+            Built for employers and candidates
+          </h2>
+          <p class="mt-3 section-sub">
+            We handle sourcing, screening, documentation, readiness, and deployment support.
+          </p>
+        </div>
+
+        <a
+          href="/services"
+          class="no-underline inline-flex items-center justify-center rounded-2xl bg-slate-100 px-5 py-3 font-extrabold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200"
+        >
+          View all services →
+        </a>
+      </div>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        {topServices.map((s) => (
+          <a href={`/services/${s.slug}`} class="no-underline block h-full">
+            <Card eyebrow={s.category} title={s.title} text={s.short} icon={s.icon}>
+              <div class="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-brand-navy">
+                View details <span aria-hidden="true">→</span>
+              </div>
+            </Card>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-slate-50 section-pad">
+    <div class="container mx-auto px-4">
+      <div class="rounded-3xl bg-brand-navy p-8 md:p-10 text-white shadow-soft">
+        <h2 class="text-xl md:text-2xl font-extrabold">
+          Ready to start your recruitment journey?
+        </h2>
+        <p class="mt-3 max-w-2xl text-white/80">
+          Whether you are an employer looking for workers or a candidate seeking overseas employment,
+          we’ll guide you through the process.
+        </p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/contact"
+            class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+          >
+            Contact Us
+          </a>
+          <a
+            href="/process"
+            class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
+          >
+            View Process
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

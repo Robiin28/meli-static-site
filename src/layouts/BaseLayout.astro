@@ -1,0 +1,38 @@
+---
+import "../styles/global.css";
+import Nav from "../components/astro/Nav.astro";
+import Footer from "../components/astro/Footer.astro";
+
+const { title, description } = Astro.props;
+
+const pageTitle = title
+  ? `${title} | Meli Private Employment Agency`
+  : "Meli Private Employment Agency";
+
+const pageDesc =
+  description ??
+  "Meli Private Employment Agency provides foreign employment and recruitment services across multiple sectors.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={pageDesc} />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:type" content="website" />
+
+    <title>{pageTitle}</title>
+  </head>
+
+  <body class="min-h-screen bg-white text-slate-900">
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

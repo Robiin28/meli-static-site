@@ -1,0 +1,100 @@
+---
+const { pathname } = Astro.url;
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/process", label: "Process" },
+  { href: "/blog", label: "Blog" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+
+const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+---
+
+<header class="sticky top-0 z-50 border-b border-white/20 bg-brand-navy/95 backdrop-blur shadow-soft">
+  <div class="container mx-auto px-4">
+    <div class="flex h-16 items-center justify-between">
+      <a href="/" class="no-underline flex items-center gap-3 text-white">
+        <span class="grid h-9 w-9 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
+          <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+        </span>
+        <div class="leading-tight">
+          <div class="text-sm font-extrabold tracking-tight">Meli PEA</div>
+          <div class="text-[11px] text-white/75">Foreign Employment</div>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden items-center gap-2 md:flex">
+        {links.map((l) => (
+          <a
+            href={l.href}
+            class={`no-underline rounded-xl px-3 py-2 text-sm font-extrabold transition ring-1 ${
+              isActive(l.href)
+                ? "bg-white/15 text-white ring-white/30"
+                : "text-white/85 ring-transparent hover:bg-white/10 hover:text-white hover:ring-white/20"
+            }`}
+          >
+            {l.label}
+          </a>
+        ))}
+
+        <a
+          href="/contact"
+          class="no-underline ml-2 rounded-2xl bg-brand-gold px-4 py-2 text-sm font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+        >
+          Get Started
+        </a>
+      </nav>
+
+      <!-- Mobile -->
+      <button
+        id="menuBtn"
+        class="md:hidden rounded-xl bg-white/10 px-3 py-2 text-sm font-extrabold text-white ring-1 ring-white/20 hover:bg-white/15"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        Menu
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden pb-4 md:hidden">
+      <div class="mt-2 grid gap-2 border-t border-white/15 pt-3">
+        {links.map((l) => (
+          <a
+            href={l.href}
+            class={`no-underline rounded-xl px-3 py-2 text-sm font-extrabold transition ring-1 ${
+              isActive(l.href)
+                ? "bg-white/15 text-white ring-white/30"
+                : "text-white/85 ring-white/10 hover:bg-white/10 hover:text-white"
+            }`}
+          >
+            {l.label}
+          </a>
+        ))}
+
+        <a
+          href="/contact"
+          class="no-underline rounded-2xl bg-brand-gold px-4 py-3 text-center text-sm font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+        >
+          Get Started
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    const btn = document.getElementById("menuBtn");
+    const menu = document.getElementById("mobileMenu");
+    if (btn && menu) {
+      btn.addEventListener("click", () => {
+        const open = !menu.classList.contains("hidden");
+        menu.classList.toggle("hidden");
+        btn.setAttribute("aria-expanded", String(!open));
+      });
+    }
+  </script>
+</header>

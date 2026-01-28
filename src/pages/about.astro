@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/astro/PageHero.astro";
+import Stat from "../components/astro/Stat.astro";
+import Card from "../components/astro/Card.astro";
+---
+
+<BaseLayout title="About" description="Learn about Meli Private Employment Agency and how we work.">
+  <PageHero
+    badge="Who we are"
+    title="Trusted Recruitment & Foreign Employment Support"
+    subtitle="We focus on transparency, compliance, and matching the right candidates to the right roles."
+    ctaHref="/contact"
+    ctaLabel="Talk to Us"
+  />
+
+  <section class="bg-white">
+    <div class="container mx-auto px-4 py-12 md:py-16 lg:py-20">
+      <!-- Top split -->
+      <div class="grid gap-8 lg:grid-cols-3">
+        <div class="lg:col-span-2 rounded-3xl bg-slate-50 p-7 md:p-10 ring-1 ring-slate-200">
+          <h2 class="text-xl font-extrabold text-slate-900">Our mission</h2>
+          <p class="mt-3 text-slate-700 leading-7">
+            To help candidates access safe overseas opportunities and help employers find qualified,
+            verified talent through a structured recruitment process.
+          </p>
+
+          <h3 class="mt-10 text-xl font-extrabold text-slate-900">How we work</h3>
+          <ul class="mt-4 grid gap-3 text-slate-700">
+            <li class="rounded-2xl bg-white p-4 ring-1 ring-slate-200">
+              Compliance-first workflow with clear steps
+            </li>
+            <li class="rounded-2xl bg-white p-4 ring-1 ring-slate-200">
+              Screening and readiness to reduce mismatch risk
+            </li>
+            <li class="rounded-2xl bg-white p-4 ring-1 ring-slate-200">
+              Transparent communication from start to deployment
+            </li>
+          </ul>
+        </div>
+
+        <div class="grid gap-6">
+          <Stat value="End-to-end" label="Support from documentation to deployment" />
+          <Stat value="Compliance" label="Structured workflow and approvals" />
+          <Stat value="Quality" label="Screening and readiness checks" />
+        </div>
+      </div>
+
+      <!-- Why choose us -->
+      <div class="mt-10 md:mt-12 rounded-3xl bg-white p-7 md:p-10 ring-1 ring-slate-200 shadow-soft">
+        <div class="flex flex-col gap-2">
+          <h2 class="text-xl font-extrabold text-slate-900">Why choose us</h2>
+          <p class="text-sm text-slate-600">
+            We’re built around process clarity and practical support for both employers and candidates.
+          </p>
+        </div>
+
+        <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Card
+            eyebrow="Value"
+            title="Transparency"
+            text="Clear steps, checklists, and timelines—so you always know what’s next."
+          />
+          <Card
+            eyebrow="Value"
+            title="Compliance-first"
+            text="We follow structured documentation and approval workflows based on destination requirements."
+          />
+          <Card
+            eyebrow="Value"
+            title="Candidate readiness"
+            text="Screening and preparation reduce mismatch and improve deployment success."
+          />
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-10 md:mt-12 rounded-3xl bg-brand-navy p-8 md:p-10 text-white shadow-soft">
+        <h3 class="text-xl md:text-2xl font-extrabold">Let’s work together</h3>
+        <p class="mt-3 max-w-2xl text-white/80">
+          Share your recruitment needs or career goals and we’ll guide you through the next steps.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/contact"
+            class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+          >
+            Contact Us
+          </a>
+          <a
+            href="/process"
+            class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
+          >
+            View Process
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
