@@ -6,16 +6,14 @@ import Card from "../components/astro/Card.astro";
 import Stat from "../components/astro/Stat.astro";
 
 import { services } from "../data/services.js";
-import { posts } from "../data/blog.js";
 
+const BASE = import.meta.env.BASE_URL;
 const topServices = services.slice(0, 3);
-const latestPosts = [...posts].sort((a, b) => (a.date < b.date ? 1 : -1)).slice(0, 3);
 ---
 
 <BaseLayout title="Home" description="Meli Private Employment Agency provides foreign employment and recruitment services across multiple sectors.">
   <!-- HERO (UNCHANGED) -->
   <section class="relative overflow-hidden bg-brand-navy text-white">
-    <!-- Code glow background: static, low opacity, almost free performance -->
     <div class="pointer-events-none absolute inset-0 opacity-[0.07] blur-[0.2px]">
       <pre class="absolute -top-10 left-1/2 w-245 -translate-x-1/2 text-[10px] leading-4 text-white">
 {`const pipeline = ["contract","auth","license","screen","medical","qr","travel"];
@@ -40,13 +38,13 @@ export const recruit = async (candidate) => pipeline.map(step => ({ step, ok: tr
 
       <div class="mt-8 flex flex-wrap gap-4">
         <a
-          href="/services"
+          href={`${BASE}services/`}
           class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-semibold text-slate-900 shadow-soft hover:opacity-95"
         >
           Explore Services
         </a>
         <a
-          href="/process"
+          href={`${BASE}process/`}
           class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
         >
           Recruitment Process
@@ -55,7 +53,7 @@ export const recruit = async (candidate) => pipeline.map(step => ({ step, ok: tr
     </div>
   </section>
 
-  <!-- WHY US (BM-like clarity, but your brand) -->
+  <!-- WHY US -->
   <section class="bg-white section-pad">
     <div class="container mx-auto px-4">
       <div class="max-w-2xl">
@@ -71,24 +69,9 @@ export const recruit = async (candidate) => pipeline.map(step => ({ step, ok: tr
       </div>
 
       <div class="mt-8 grid gap-6 md:grid-cols-3">
-        <Card
-          icon="shield"
-          eyebrow="Pillar 01"
-          title="Compliance & Transparency"
-          text="Structured workflow, clear checklists, and step-by-step guidance aligned with destination requirements."
-        />
-        <Card
-          icon="headset"
-          eyebrow="Pillar 02"
-          title="Dedicated Support"
-          text="We guide employers and candidates through documentation, screening, and readiness with consistent communication."
-        />
-        <Card
-          icon="plane"
-          eyebrow="Pillar 03"
-          title="Deployment Focus"
-          text="Final briefings, travel coordination, and practical preparation so placements succeed."
-        />
+        <Card icon="shield" eyebrow="Pillar 01" title="Compliance & Transparency" text="Structured workflow, clear checklists, and step-by-step guidance aligned with destination requirements." />
+        <Card icon="headset" eyebrow="Pillar 02" title="Dedicated Support" text="We guide employers and candidates through documentation, screening, and readiness with consistent communication." />
+        <Card icon="plane" eyebrow="Pillar 03" title="Deployment Focus" text="Final briefings, travel coordination, and practical preparation so placements succeed." />
       </div>
     </div>
   </section>
@@ -121,7 +104,7 @@ export const recruit = async (candidate) => pipeline.map(step => ({ step, ok: tr
         </div>
 
         <a
-          href="/services"
+          href={`${BASE}services/`}
           class="no-underline inline-flex items-center justify-center rounded-2xl bg-slate-100 px-5 py-3 font-extrabold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200"
         >
           View all services →
@@ -130,7 +113,7 @@ export const recruit = async (candidate) => pipeline.map(step => ({ step, ok: tr
 
       <div class="mt-8 grid gap-6 md:grid-cols-3">
         {topServices.map((s) => (
-          <a href={`/services/${s.slug}`} class="no-underline block h-full">
+          <a href={`${BASE}services/${s.slug}/`} class="no-underline block h-full">
             <Card eyebrow={s.category} title={s.title} text={s.short} icon={s.icon}>
               <div class="mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-brand-navy">
                 View details <span aria-hidden="true">→</span>
@@ -156,13 +139,13 @@ export const recruit = async (candidate) => pipeline.map(step => ({ step, ok: tr
 
         <div class="mt-6 flex flex-wrap gap-3">
           <a
-            href="/contact"
+            href={`${BASE}contact/`}
             class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95"
           >
             Contact Us
           </a>
           <a
-            href="/process"
+            href={`${BASE}process/`}
             class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
           >
             View Process

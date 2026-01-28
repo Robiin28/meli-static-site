@@ -1,22 +1,33 @@
 ---
+const BASE = import.meta.env.BASE_URL;
 const { pathname } = Astro.url;
 
+// pathname includes base in production, so we remove it for active matching
+const cleanPath = pathname.startsWith(BASE)
+  ? "/" + pathname.slice(BASE.length).replace(/^\/?/, "")
+  : pathname;
+
 const links = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/process", label: "Process" },
-  { href: "/blog", label: "Blog" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: `${BASE}`, label: "Home" },
+  { href: `${BASE}services/`, label: "Services" },
+  { href: `${BASE}process/`, label: "Process" },
+  { href: `${BASE}blog/`, label: "Blog" },
+  { href: `${BASE}about/`, label: "About" },
+  { href: `${BASE}contact/`, label: "Contact" },
 ];
 
-const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+const isActive = (href: string) => {
+  // convert BASE links back into clean paths like "/services/"
+  const path = href.startsWith(BASE) ? "/" + href.slice(BASE.length) : href;
+  if (path === "/") return cleanPath === "/";
+  return cleanPath.startsWith(path);
+};
 ---
 
 <header class="sticky top-0 z-50 border-b border-white/20 bg-brand-navy/95 backdrop-blur shadow-soft">
   <div class="container mx-auto px-4">
     <div class="flex h-16 items-center justify-between">
-      <a href="/" class="no-underline flex items-center gap-3 text-white">
+      <a href={`${BASE}`} class="no-underline flex items-center gap-3 text-white">
         <span class="grid h-9 w-9 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
           <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
         </span>
@@ -26,7 +37,7 @@ const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.s
         </div>
       </a>
 
-      <!-- Desktop nav -->
+      <!-- Desktop -->
       <nav class="hidden items-center gap-2 md:flex">
         {links.map((l) => (
           <a
@@ -42,7 +53,7 @@ const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.s
         ))}
 
         <a
-          href="/contact"
+          href={`${BASE}contact/`}
           class="no-underline ml-2 rounded-2xl bg-brand-gold px-4 py-2 text-sm font-extrabold text-slate-900 shadow-soft hover:opacity-95"
         >
           Get Started
@@ -66,10 +77,8 @@ const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.s
         {links.map((l) => (
           <a
             href={l.href}
-            class={`no-underline rounded-xl px-3 py-2 text-sm font-extrabold transition ring-1 ${
-              isActive(l.href)
-                ? "bg-white/15 text-white ring-white/30"
-                : "text-white/85 ring-white/10 hover:bg-white/10 hover:text-white"
+            class={`no-underline rounded-xl px-3 py-2 text-sm font-extrabold transition ${
+              isActive(l.href) ? "bg-white/15 text-white" : "text-white/85 hover:bg-white/10 hover:text-white"
             }`}
           >
             {l.label}
@@ -77,7 +86,7 @@ const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.s
         ))}
 
         <a
-          href="/contact"
+          href={`${BASE}contact/`}
           class="no-underline rounded-2xl bg-brand-gold px-4 py-3 text-center text-sm font-extrabold text-slate-900 shadow-soft hover:opacity-95"
         >
           Get Started
