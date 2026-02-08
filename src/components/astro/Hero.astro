@@ -1,43 +1,252 @@
 ---
 import HeroCursor from "../react/HeroCursor";
+const BASE = import.meta.env.BASE_URL;
 ---
 
-<section class="relative overflow-hidden bg-brand-navy text-white">
-  <!-- Code glow background: static, low opacity, almost free performance -->
-  <div class="pointer-events-none absolute inset-0 opacity-[0.07] blur-[0.2px]">
-    <pre class="absolute -top-10 left-1/2 w-245 -translate-x-1/2 text-[10px] leading-4 text-white">
-{`const pipeline = ["contract","auth","license","screen","medical","qr","travel"];
-export const recruit = async (candidate) => pipeline.map(step => ({ step, ok: true }));`}
-    </pre>
+<section class="hero-flow relative min-h-screen overflow-hidden text-white">
+  <!-- BASE SURFACE (same as nav) -->
+  <div class="absolute inset-0 hero-flow__surface"></div>
+
+  <!-- ✅ REMOVED: TOP DENSITY CAP + TOP GRADIENT FADE -->
+
+  <!-- FLOWING GRADIENT ACCENTS -->
+  <div class="pointer-events-none absolute inset-0 hero-flow__accents">
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--a mix-blend-screen"></div>
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--b mix-blend-screen"></div>
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--c mix-blend-screen"></div>
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--d mix-blend-overlay"></div>
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--e mix-blend-screen"></div>
+    <div class="absolute inset-0 opacity-[0.05] mix-blend-overlay hero-flow__grain"></div>
   </div>
 
-  <div class="container mx-auto px-4 py-20 relative">
-    <div class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs ring-1 ring-white/20">
-      <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
-      Foreign Employment & Recruitment
-    </div>
+  <!-- CONTENT -->
+  <div class="relative container mx-auto flex min-h-screen items-center justify-center px-4">
+    <div class="max-w-3xl text-center">
+      <div class="inline-flex items-center gap-2 rounded-full bg-white/8 px-3 py-1 text-xs ring-1 ring-white/15">
+        <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+        Foreign Employment Agency
+      </div>
 
-    <h1 class="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl">
-      Meli Private Employment Agency
-    </h1>
+      <h1 class="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl">
+        Hire better.
+        <span class="block text-white/85">Deploy faster.</span>
+      </h1>
 
-    <p class="mt-4 max-w-2xl text-lg text-white/80 md:text-xl">
-      We create jobs; we create careers<span class="inline-block"><HeroCursor client:load /></span>
-    </p>
+      <p class="mx-auto mt-4 max-w-xl text-base text-white/70 md:text-lg">
+        Meli Private Employment Agency connects employers with verified overseas candidates —
+        clearly, compliantly, and without friction.
+        <span class="ml-1 inline-block align-middle">
+          <HeroCursor client:load />
+        </span>
+      </p>
 
-    <div class="mt-8 flex flex-wrap gap-4">
-      <a
-        href="/services"
-        class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-semibold text-slate-900 shadow-soft hover:opacity-95"
-      >
-        Explore Services
-      </a>
-      <a
-        href="/process"
-        class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
-      >
-        Recruitment Process
-      </a>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <a
+          href={`${BASE}contact/`}
+          class="no-underline rounded-2xl bg-brand-gold px-6 py-3 text-sm font-extrabold text-slate-900
+                 shadow-xl hover:opacity-95 active:scale-[0.98] transition"
+        >
+          Get started
+        </a>
+
+        <a
+          href={`${BASE}services/`}
+          class="no-underline rounded-2xl bg-white/8 px-6 py-3 text-sm font-extrabold
+                 ring-1 ring-white/15 hover:bg-white/12 active:scale-[0.98] transition"
+        >
+          Services →
+        </a>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* ✅ Use your global CSS variables */
+ .hero-flow__surface {
+  background-color: rgb(var(--brand-navy));
+}
+
+  .hero-flow__layer {
+    will-change: transform, opacity, filter;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .hero-flow__layer--a {
+    background: radial-gradient(
+      520px 360px at 58% 62%,
+      rgba(255, 200, 70, 0.45),
+      rgba(255, 170, 55, 0.18) 40%,
+      rgba(200, 205, 230, 0.06) 60%,
+      transparent 75%
+    );
+    filter: blur(4px) saturate(1.25) brightness(1.08);
+    animation: goldDriftA 9.5s ease-in-out infinite;
+  }
+
+  .hero-flow__layer--b {
+    background: radial-gradient(
+      480px 340px at 38% 74%,
+      rgba(255, 230, 140, 0.32),
+      rgba(255, 200, 95, 0.14) 40%,
+      rgba(185, 195, 225, 0.05) 60%,
+      transparent 78%
+    );
+    filter: blur(6px) saturate(1.18) brightness(1.05);
+    animation: goldDriftB 11s ease-in-out infinite;
+  }
+
+  .hero-flow__layer--c {
+    background: radial-gradient(
+      520px 320px at 50% 105%,
+      rgba(255, 215, 95, 0.26),
+      rgba(255, 190, 80, 0.12) 45%,
+      rgba(180, 190, 220, 0.04) 65%,
+      transparent 80%
+    );
+    filter: blur(8px) saturate(1.15) brightness(1.03);
+    animation: goldLiftC 12.5s ease-in-out infinite;
+  }
+
+  .hero-flow__layer--e {
+    background: radial-gradient(
+      420px 420px at 50% 54%,
+      rgba(255, 215, 110, 0.14),
+      rgba(255, 195, 90, 0.06) 45%,
+      transparent 75%
+    );
+    filter: blur(10px) saturate(1.2) brightness(1.05);
+    animation: bloomPulse 5.2s ease-in-out infinite;
+  }
+
+  .hero-flow__grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+  }
+
+  @keyframes goldDriftA {
+    0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
+    20%  { transform: translate3d(-58px, 28px, 0) scale(1.10) rotate(1.8deg); opacity: 0.95; }
+    45%  { transform: translate3d(46px, -34px, 0) scale(1.06) rotate(-1.6deg); opacity: 1; }
+    70%  { transform: translate3d(-32px, -18px, 0) scale(1.12) rotate(1.2deg); opacity: 0.96; }
+    100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  @keyframes goldDriftB {
+    0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 0.92; }
+    25%  { transform: translate3d(64px, -34px, 0) scale(1.08) rotate(-2deg); opacity: 1; }
+    55%  { transform: translate3d(-52px, 44px, 0) scale(1.05) rotate(1.7deg); opacity: 0.90; }
+    80%  { transform: translate3d(22px, 8px, 0) scale(1.07) rotate(-1deg); opacity: 0.95; }
+    100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 0.92; }
+  }
+
+  @keyframes goldLiftC {
+    0%   { transform: translate3d(0,0,0) scale(1); opacity: 0.88; }
+    30%  { transform: translate3d(34px, -46px, 0) scale(1.08); opacity: 1; }
+    60%  { transform: translate3d(-38px, 28px, 0) scale(1.04); opacity: 0.92; }
+    85%  { transform: translate3d(14px, -10px, 0) scale(1.06); opacity: 0.96; }
+    100% { transform: translate3d(0,0,0) scale(1); opacity: 0.88; }
+  }
+
+  @keyframes shimmerSweep {
+    0%   { transform: translate3d(-90px, 40px, 0) rotate(0deg); opacity: 0.25; }
+    30%  { transform: translate3d(85px, -30px, 0) rotate(-2deg); opacity: 0.8; }
+    60%  { transform: translate3d(-65px, -18px, 0) rotate(1.6deg); opacity: 0.4; }
+    100% { transform: translate3d(-90px, 40px, 0) rotate(0deg); opacity: 0.25; }
+  }
+
+  @keyframes bloomPulse {
+    0%   { opacity: 0.16; }
+    50%  { opacity: 0.36; }
+    100% { opacity: 0.16; }
+  }
+
+  .hero-flow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      600px 420px at 52% 58%,
+      rgba(255, 215, 110, 0.045),
+      rgba(220, 220, 245, 0.015) 45%,
+      transparent 70%
+    );
+    pointer-events: none;
+    animation: glowBreath 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes glowBreath {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+
+  @media (max-width: 768px) {
+    .hero-flow__layer--a,
+    .hero-flow__layer--b,
+    .hero-flow__layer--c,
+    .hero-flow__layer--e {
+      filter: blur(3px) saturate(1.12) brightness(1.02);
+    }
+
+    .hero-flow__layer--a {
+      background: radial-gradient(
+        380px 260px at 56% 60%,
+        rgba(255, 200, 70, 0.42),
+        rgba(255, 170, 55, 0.16) 40%,
+        rgba(200, 205, 230, 0.05) 60%,
+        transparent 76%
+      );
+    }
+    .hero-flow__layer--b {
+      background: radial-gradient(
+        340px 240px at 40% 72%,
+        rgba(255, 230, 140, 0.30),
+        rgba(255, 200, 95, 0.13) 42%,
+        rgba(185, 195, 225, 0.04) 62%,
+        transparent 80%
+      );
+    }
+    .hero-flow__layer--c {
+      background: radial-gradient(
+        360px 220px at 50% 106%,
+        rgba(255, 215, 95, 0.24),
+        rgba(255, 190, 80, 0.11) 48%,
+        rgba(180, 190, 220, 0.035) 66%,
+        transparent 82%
+      );
+    }
+    .hero-flow__layer--e {
+      background: radial-gradient(
+        300px 300px at 50% 54%,
+        rgba(255, 215, 110, 0.13),
+        rgba(255, 195, 90, 0.055) 46%,
+        transparent 78%
+      );
+    }
+
+    @keyframes goldDriftA {
+      0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
+      25%  { transform: translate3d(-30px, 16px, 0) scale(1.07) rotate(1.2deg); opacity: 0.96; }
+      55%  { transform: translate3d(26px, -18px, 0) scale(1.04) rotate(-1deg); opacity: 1; }
+      100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
+    }
+    @keyframes goldDriftB {
+      0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 0.92; }
+      30%  { transform: translate3d(34px, -18px, 0) scale(1.06) rotate(-1.2deg); opacity: 1; }
+      60%  { transform: translate3d(-28px, 24px, 0) scale(1.03) rotate(1deg); opacity: 0.90; }
+      100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 0.92; }
+    }
+    @keyframes goldLiftC {
+      0%   { transform: translate3d(0,0,0) scale(1); opacity: 0.88; }
+      45%  { transform: translate3d(18px, -22px, 0) scale(1.05); opacity: 1; }
+      100% { transform: translate3d(0,0,0) scale(1); opacity: 0.88; }
+    }
+
+    .hero-flow__layer--d { animation-duration: 4.2s; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-flow__layer { animation: none !important; }
+    .hero-flow::before { animation: none !important; }
+  }
+</style>

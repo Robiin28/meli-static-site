@@ -1,11 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --brand-navy: 12 24 44;
+  --brand-navy: 10 18 38;
+
   --brand-gold: 245 191 79;
+
+  --page-bg: 255 255 255;
+  --page-ink: 2 6 23;
+  --page-muted: 71 85 105;
 }
-/* Optional: site-wide dark feel */
-body { background: rgb(2 6 23); } /* slate-950 */
+
+body {
+  background: rgb(var(--page-bg));
+  color: rgb(var(--page-ink));
+}
+
 
 /* Brand helpers */
 .bg-brand-navy { background-color: rgb(var(--brand-navy)); }
@@ -13,32 +22,44 @@ body { background: rgb(2 6 23); } /* slate-950 */
 .bg-brand-gold { background-color: rgb(var(--brand-gold)); }
 .text-brand-gold { color: rgb(var(--brand-gold)); }
 
-/* Soft shadow used in buttons/cards */
 .shadow-soft {
   box-shadow: 0 18px 40px rgba(2, 6, 23, 0.12);
 }
 
-/* Better focus */
 :focus-visible {
   outline: 2px solid rgba(245, 191, 79, 0.6);
   outline-offset: 2px;
 }
 
-/* Simple “prose” without @tailwindcss/typography */
-.proseish p { margin-top: 1rem; line-height: 1.8; color: rgb(51 65 85); } /* slate-700 */
+.proseish p {
+  margin-top: 1rem;
+  line-height: 1.8;
+  color: rgb(51 65 85);
+}
 .proseish p:first-child { margin-top: 0; }
-.proseish ul { margin-top: 1rem; padding-left: 1.25rem; color: rgb(51 65 85); }
+.proseish ul {
+  margin-top: 1rem;
+  padding-left: 1.25rem;
+  color: rgb(51 65 85);
+}
 .proseish li { margin-top: .5rem; }
 
-/* Standard section rhythm (BM-like spacing logic) */
 .section-pad { padding-top: 3rem; padding-bottom: 3rem; }
 @media (min-width: 768px) { .section-pad { padding-top: 4rem; padding-bottom: 4rem; } }
 @media (min-width: 1024px) { .section-pad { padding-top: 5rem; padding-bottom: 5rem; } }
 
 .section-title { font-weight: 800; letter-spacing: -0.02em; }
-.section-sub { color: rgb(71 85 105); } /* slate-600 */
+.section-sub { color: rgb(var(--page-muted)); }
 
-/* Slightly stronger shadow for sticky nav separation (optional, safe) */
-header.shadow-soft {
-  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.25);
+/* Optional page canvas blend */
+.page-canvas {
+  background:
+    radial-gradient(700px 420px at 85% 0%,
+      rgba(245, 191, 79, 0.06),
+      transparent 60%),
+    linear-gradient(
+      to bottom,
+      rgba(240, 244, 252, 0.95) 0%,
+      #ffffff 55%
+    );
 }

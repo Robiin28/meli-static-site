@@ -1,11 +1,5 @@
 ---
 const BASE = import.meta.env.BASE_URL;
-const { pathname } = Astro.url;
-
-// pathname includes base in production, so we remove it for active matching
-const cleanPath = pathname.startsWith(BASE)
-  ? "/" + pathname.slice(BASE.length).replace(/^\/?/, "")
-  : pathname;
 
 const links = [
   { href: `${BASE}`, label: "Home" },
@@ -16,78 +10,111 @@ const links = [
   { href: `${BASE}contact/`, label: "Contact" },
 ];
 
-const isActive = (href: string) => {
-  // convert BASE links back into clean paths like "/services/"
-  const path = href.startsWith(BASE) ? "/" + href.slice(BASE.length) : href;
-  if (path === "/") return cleanPath === "/";
-  return cleanPath.startsWith(path);
-};
+// ✅ Transparent logo in /public/assets/brand/
+const LOGO_SRC = `${BASE}assets/brand/logoo.png`;
 ---
 
-<header class="sticky top-0 z-50 border-b border-white/20 bg-brand-navy/95 backdrop-blur shadow-soft">
+<header
+  class="site-header sticky top-0 z-50"
+  transition:persist="site-header"
+  data-base={BASE}
+>
+  <!-- Flow-only fade under header (NO color change, just dissolve) -->
+  <div class="pointer-events-none absolute inset-x-0 bottom-[-28px] h-7 header-fade"></div>
+
   <div class="container mx-auto px-4">
     <div class="flex h-16 items-center justify-between">
-      <a href={`${BASE}`} class="no-underline flex items-center gap-3 text-white">
-        <span class="grid h-9 w-9 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20">
-          <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
-        </span>
-        <div class="leading-tight">
-          <div class="text-sm font-extrabold tracking-tight">Meli PEA</div>
-          <div class="text-[11px] text-white/75">Foreign Employment</div>
+      <!-- Brand -->
+      <a
+        href={`${BASE}`}
+        class="group flex items-center gap-3 no-underline transition-transform hover:scale-[1.02] active:scale-[0.98]"
+      >
+        <div class="relative flex h-12 items-center" transition:persist="site-logo">
+          <span class="pointer-events-none absolute -inset-1 rounded-full bg-gradient-to-r from-brand-gold/20 via-transparent to-brand-gold/20 blur-sm"></span>
+
+          <img
+            src={LOGO_SRC}
+            alt="Meli PEA logo"
+            class="relative h-10 w-auto object-contain drop-shadow-lg"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </div>
+
+        <div class="leading-tight" transition:persist="site-brand-text">
+          <div class="text-lg font-bold tracking-tight text-white group-hover:text-brand-gold transition-colors">
+            Meli PEA
+          </div>
+          <div class="text-xs text-white/70 font-medium">Foreign Employment</div>
         </div>
       </a>
 
-      <!-- Desktop -->
-      <nav class="hidden items-center gap-2 md:flex">
+      <!-- Desktop Navigation -->
+      <nav class="hidden items-center gap-1 md:flex">
         {links.map((l) => (
           <a
             href={l.href}
-            class={`no-underline rounded-xl px-3 py-2 text-sm font-extrabold transition ring-1 ${
-              isActive(l.href)
-                ? "bg-white/15 text-white ring-white/30"
-                : "text-white/85 ring-transparent hover:bg-white/10 hover:text-white hover:ring-white/20"
-            }`}
+            data-nav-link
+            class="navlink relative no-underline rounded-xl px-4 py-2.5 text-sm font-semibold
+                   transition-all duration-200 text-white/80 hover:text-white"
           >
-            {l.label}
+            <span>{l.label}</span>
+
+            <!-- soft flow highlight (no ring/border) -->
+            <span class="navglow pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-200"></span>
+
+            <span class="navdot absolute -right-1 top-1 h-2 w-2 rounded-full bg-brand-gold opacity-0 scale-75 transition-all duration-200"></span>
           </a>
         ))}
 
         <a
           href={`${BASE}contact/`}
-          class="no-underline ml-2 rounded-2xl bg-brand-gold px-4 py-2 text-sm font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+          class="ml-2 rounded-xl bg-gradient-to-r from-brand-gold to-amber-500 px-5 py-2.5 text-sm font-bold text-slate-900
+                 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all duration-200
+                 hover:from-amber-500 hover:to-brand-gold"
         >
           Get Started
         </a>
       </nav>
 
-      <!-- Mobile -->
+      <!-- Mobile Menu Button -->
       <button
         id="menuBtn"
-        class="md:hidden rounded-xl bg-white/10 px-3 py-2 text-sm font-extrabold text-white ring-1 ring-white/20 hover:bg-white/15"
+        class="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-1.5"
         aria-expanded="false"
         aria-controls="mobileMenu"
       >
-        Menu
+        <span class="sr-only">Toggle menu</span>
+        <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300"></span>
+        <span class="hamburger-mid  w-6 h-0.5 bg-white transition-all duration-300"></span>
+        <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300"></span>
       </button>
     </div>
 
-    <!-- Mobile menu -->
-    <div id="mobileMenu" class="hidden pb-4 md:hidden">
-      <div class="mt-2 grid gap-2 border-t border-white/15 pt-3">
+    <!-- Mobile Menu -->
+    <div
+      id="mobileMenu"
+      class="hidden md:hidden overflow-hidden will-change-[transform,opacity,max-height]"
+      data-state="closed"
+    >
+      <div class="mt-2 grid gap-1 pt-4 pb-2">
         {links.map((l) => (
           <a
             href={l.href}
-            class={`no-underline rounded-xl px-3 py-2 text-sm font-extrabold transition ${
-              isActive(l.href) ? "bg-white/15 text-white" : "text-white/85 hover:bg-white/10 hover:text-white"
-            }`}
+            data-nav-link
+            class="mobilelink no-underline rounded-xl px-4 py-3 text-sm font-semibold transition-all duration-200
+                   flex items-center gap-3 text-white/80 hover:bg-white/7 hover:text-white"
           >
-            {l.label}
+            <span class="mobiledot h-2 w-2 rounded-full bg-brand-gold opacity-0 scale-75 transition-all duration-200"></span>
+            <span>{l.label}</span>
           </a>
         ))}
 
         <a
           href={`${BASE}contact/`}
-          class="no-underline rounded-2xl bg-brand-gold px-4 py-3 text-center text-sm font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+          class="mt-2 rounded-xl bg-gradient-to-r from-brand-gold to-amber-500 px-4 py-3.5 text-center text-sm font-bold text-slate-900
+                 shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98]"
         >
           Get Started
         </a>
@@ -96,14 +123,208 @@ const isActive = (href: string) => {
   </div>
 
   <script is:inline>
+    const header = document.querySelector("header[data-base]");
+    const BASE = header?.dataset?.base || "/";
+
+    const normalize = (p) => {
+      if (!p) return "/";
+      let s = p;
+
+      try {
+        if (s.startsWith("http")) s = new URL(s).pathname;
+      } catch {}
+
+      if (!s.startsWith("/")) s = "/" + s;
+
+      if (BASE !== "/" && s.startsWith(BASE)) {
+        s = "/" + s.slice(BASE.length).replace(/^\/+/, "");
+      }
+
+      s = s.replace(/\/+$/, "");
+      return s === "" ? "/" : s;
+    };
+
+    const setActiveNav = () => {
+      const current = normalize(window.location.pathname);
+
+      document.querySelectorAll("a[data-nav-link]").forEach((a) => {
+        const href = a.getAttribute("href") || "/";
+        const linkPath = normalize(href);
+
+        const active =
+          linkPath === "/"
+            ? current === "/"
+            : current === linkPath || current.startsWith(linkPath + "/");
+
+        // desktop styles (NO RING/BORDER, just glow + softer pill)
+        if (a.classList.contains("navlink")) {
+          a.classList.toggle("text-white", active);
+          a.classList.toggle("text-white/80", !active);
+
+          a.classList.toggle("bg-white/10", active);
+          a.classList.toggle("bg-white/0", !active);
+
+          const glow = a.querySelector(".navglow");
+          if (glow) {
+            glow.classList.toggle("opacity-100", active);
+            glow.classList.toggle("opacity-0", !active);
+          }
+
+          const dot = a.querySelector(".navdot");
+          if (dot) {
+            dot.classList.toggle("opacity-0", !active);
+            dot.classList.toggle("opacity-100", active);
+            dot.classList.toggle("scale-75", !active);
+            dot.classList.toggle("scale-100", active);
+          }
+        }
+
+        // mobile styles
+        if (a.classList.contains("mobilelink")) {
+          a.classList.toggle("bg-white/8", active);
+          a.classList.toggle("text-white", active);
+          a.classList.toggle("text-white/80", !active);
+
+          const dot = a.querySelector(".mobiledot");
+          if (dot) {
+            dot.classList.toggle("opacity-0", !active);
+            dot.classList.toggle("opacity-100", active);
+            dot.classList.toggle("scale-75", !active);
+            dot.classList.toggle("scale-100", active);
+          }
+        }
+
+        a.classList.toggle("is-active", active);
+      });
+    };
+
+    // run now + after Astro swaps pages
+    document.addEventListener("astro:page-load", setActiveNav);
+    document.addEventListener("astro:after-swap", setActiveNav);
+    setActiveNav();
+
+    // Mobile menu toggle
     const btn = document.getElementById("menuBtn");
     const menu = document.getElementById("mobileMenu");
+
+    const openMenu = () => {
+      btn?.setAttribute("aria-expanded", "true");
+      if (!menu) return;
+      menu.classList.remove("hidden");
+      requestAnimationFrame(() => menu.setAttribute("data-state", "open"));
+    };
+
+    const closeMenu = () => {
+      btn?.setAttribute("aria-expanded", "false");
+      if (!menu) return;
+      menu.setAttribute("data-state", "closed");
+      setTimeout(() => menu.classList.add("hidden"), 260);
+    };
+
     if (btn && menu) {
       btn.addEventListener("click", () => {
-        const open = !menu.classList.contains("hidden");
-        menu.classList.toggle("hidden");
-        btn.setAttribute("aria-expanded", String(!open));
+        const isOpen = btn.getAttribute("aria-expanded") === "true";
+        isOpen ? closeMenu() : openMenu();
+      });
+
+      document.addEventListener("click", (e) => {
+        if (
+          btn.getAttribute("aria-expanded") === "true" &&
+          !menu.contains(e.target) &&
+          !btn.contains(e.target)
+        ) {
+          closeMenu();
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && btn.getAttribute("aria-expanded") === "true") {
+          closeMenu();
+        }
+      });
+
+      menu.addEventListener("click", (e) => {
+        const a = e.target.closest?.("a");
+        if (a && btn.getAttribute("aria-expanded") === "true") closeMenu();
       });
     }
   </script>
+
+  <style is:global>
+    /* =========================
+       HEADER: FORCE NAVY BG ALWAYS
+       (prevents "all white" on light pages)
+       ========================= */
+
+  header.site-header {
+  background: rgb(var(--brand-navy));
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: none; /* ✅ removed */
+}
+
+    /* Optional: slightly stronger on very light sections (still same color) */
+    @supports (color: color-mix(in srgb, #000, #fff)) {
+     
+    }
+
+    /* Dissolve into the hero/next section */
+    
+
+    /* Subtle nav glow layer (NO ring/border) */
+    a.navlink .navglow {
+      background:
+        radial-gradient(120px 44px at 50% 60%, rgba(245,158,11,0.14), transparent 72%),
+        linear-gradient(to bottom, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    a.navlink:hover .navglow { opacity: 1; }
+
+    /* Flow line under link instead of underline/border */
+    a.navlink::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 6px;
+      height: 2px;
+      border-radius: 999px;
+      opacity: 0;
+      transform: translateY(2px);
+      transition: opacity 220ms ease, transform 220ms ease;
+      background: linear-gradient(90deg, transparent, rgba(245,158,11,0.85), transparent);
+    }
+    a.navlink:hover::after,
+    a.navlink.is-active::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); max-height: 0; }
+      to   { opacity: 1; transform: translateY(0); max-height: 420px; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 1; transform: translateY(0); max-height: 420px; }
+      to   { opacity: 0; transform: translateY(-10px); max-height: 0; }
+    }
+
+    #mobileMenu[data-state="open"]  { animation: slideDown 260ms ease forwards; }
+    #mobileMenu[data-state="closed"]{ animation: slideUp   260ms ease forwards; }
+
+    /* Reliable hamburger animation using aria-expanded */
+    #menuBtn[aria-expanded="true"] .hamburger-line:first-of-type {
+      transform: translateY(8px) rotate(45deg);
+    }
+    #menuBtn[aria-expanded="true"] .hamburger-mid {
+      opacity: 0;
+      transform: scaleX(0.6);
+    }
+    #menuBtn[aria-expanded="true"] .hamburger-line:last-of-type {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+  </style>
 </header>

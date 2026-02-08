@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import Nav from "../components/astro/Nav.astro";
 import Footer from "../components/astro/Footer.astro";
+import { ViewTransitions } from "astro:transitions";
 
 const { title, description } = Astro.props;
 
@@ -26,13 +27,21 @@ const pageDesc =
     <meta property="og:type" content="website" />
 
     <title>{pageTitle}</title>
+
+    <!-- ✅ Enables smooth SPA-like navigation -->
+    <ViewTransitions />
   </head>
 
   <body class="min-h-screen bg-white text-slate-900">
-    <Nav />
-    <main>
+    <!-- ✅ Persistent header: no logo reload -->
+    <Nav transition:persist="site-nav" />
+
+    <!-- Page content transitions smoothly -->
+    <main class="relative">
       <slot />
     </main>
-    <Footer />
+
+    <!-- Optional: also persist footer -->
+    <Footer transition:persist="site-footer" />
   </body>
 </html>
