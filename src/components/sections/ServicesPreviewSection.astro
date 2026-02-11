@@ -7,7 +7,7 @@ import WorkflowImage from "../../images/workflow-diagram.svg";
 const BASE = import.meta.env.BASE_URL;
 const topServices = services.slice(0, 3);
 
-const iconPath = (name) => {
+const iconPath = (name: string) => {
   if (name === "document")
     return "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z";
   if (name === "shield")
@@ -31,90 +31,113 @@ const iconPath = (name) => {
     <div class="mb-20 text-center">
       <span class="inline-flex items-center gap-2 mb-6 rounded-full bg-brand-gold/10 border border-brand-gold/20 px-5 py-2.5 text-sm font-bold text-brand-gold backdrop-blur-sm">
         <span class="h-2 w-2 rounded-full bg-brand-gold shadow-[0_0_0_6px_rgba(199,160,55,0.10)]"></span>
-        Our Workflow Process
+        Our Roadmap to Success
       </span>
 
       <h2 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-brand-navy mb-6">
         Strategic
         <span class="bg-gradient-to-r from-brand-navy via-slate-900 to-brand-gold bg-clip-text text-transparent">
-          {" "}Service Flow
+          {" "}Service Journey
         </span>
       </h2>
 
       <p class="mx-auto max-w-3xl text-lg md:text-xl text-slate-600 leading-relaxed">
-        A structured workflow designed for smooth progression from initial contact to successful deployment.
+        Follow our proven roadmap — three clear phases from start to finish.
       </p>
+    </div>
+
+    <!-- Roadmap Visual Guide -->
+    <div class="flex justify-center mb-16">
+      <div class="inline-flex items-center gap-8 md:gap-16 bg-white/80 backdrop-blur-sm px-8 py-4 rounded-full border border-slate-200 shadow-sm">
+        <div class="flex items-center gap-2">
+          <span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white">1</span>
+          <span class="text-sm font-semibold text-brand-navy">Discover</span>
+        </div>
+        <div class="w-12 h-px bg-gradient-to-r from-brand-gold/50 to-brand-navy/50"></div>
+        <div class="flex items-center gap-2">
+          <span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand-navy text-xs font-bold text-white">2</span>
+          <span class="text-sm font-semibold text-brand-navy">Verify</span>
+        </div>
+        <div class="w-12 h-px bg-gradient-to-r from-brand-navy/50 to-brand-gold/50"></div>
+        <div class="flex items-center gap-2">
+          <span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white">3</span>
+          <span class="text-sm font-semibold text-brand-navy">Deploy</span>
+        </div>
+      </div>
     </div>
 
     <!-- Workflow -->
     <div class="relative">
-      <!-- Central vertical line -->
+      <!-- Central road line -->
       <div
-        class="absolute left-1/2 top-0 bottom-0 hidden w-px -translate-x-1/2 md:block
-        bg-gradient-to-b from-brand-gold/70 via-slate-200 to-brand-navy/70"
+        class="absolute left-1/2 top-0 bottom-0 hidden w-0.5 -translate-x-1/2 md:block"
+        style="background: repeating-linear-gradient(to bottom, #C7A037 0px, #C7A037 8px, transparent 8px, transparent 16px);"
       ></div>
 
       <!-- Steps -->
-      <div class="space-y-10 md:space-y-20">
-        {/* STEP 1 */}
-        <div class="relative">
-          <div class="grid md:grid-cols-2 items-start gap-10 md:gap-12">
-            <!-- CARD (right side on desktop) -->
-            <div class="relative order-1 md:order-2 md:pl-8">
-              <!-- connector line from center -->
-              <div class="absolute left-0 top-12 hidden h-px w-8 md:block bg-gradient-to-r from-slate-200 to-transparent"></div>
+      <div class="space-y-10 md:space-y-24">
 
-              <!-- dot on the center line -->
-              <div class="absolute left-0 top-8 hidden md:block -translate-x-1/2">
+        <!-- STEP 1 -->
+        <div class="relative">
+          <div class="grid md:grid-cols-2 items-center gap-10 md:gap-12">
+            <!-- CARD (right side on desktop) -->
+            <div class="relative order-1 md:order-2 md:pl-12">
+              <!-- directional arrow -->
+              <div class="absolute left-0 top-1/2 hidden md:flex -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full border-2 border-brand-gold items-center justify-center">
+                <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+
+              <!-- milestone marker -->
+              <div class="absolute left-0 top-1/2 hidden md:block -translate-x-1/2 -translate-y-1/2 z-10">
                 <div class="relative">
-                  <div class="absolute -inset-3 rounded-full bg-brand-gold/15 blur"></div>
-                  <div class="relative h-3 w-3 rounded-full bg-brand-gold ring-4 ring-white"></div>
+                  <div class="absolute -inset-4 rounded-full bg-brand-gold/20 animate-pulse"></div>
+                  <div class="relative h-5 w-5 rounded-full bg-brand-gold border-4 border-white shadow-lg"></div>
                 </div>
               </div>
 
               <a href={`${BASE}services/${topServices[0].slug}/`} class="group block no-underline">
                 <div
                   class="relative w-full max-w-[420px] lg:max-w-[440px] mx-auto md:mx-0
-                  rounded-xl bg-white
-                  border border-slate-200
-                  shadow-lg
+                  rounded-2xl bg-white
+                  border-l-8 border-brand-gold
+                  shadow-xl
                   transition-all duration-500
-                  hover:-translate-y-1 hover:shadow-xl
-                  rotate-[-2.5deg] hover:rotate-[0.5deg]"
+                  hover:-translate-y-2 hover:shadow-2xl
+                  rotate-[-2.5deg] hover:rotate-[0deg]"
                 >
-                  <!-- number badge -->
-                  <div class="absolute -top-3 -right-3">
-                    <div class="relative">
-                      <div class="absolute -inset-1 bg-brand-gold/20 rounded-lg blur"></div>
-                      <div class="relative flex h-10 w-10 items-center justify-center rounded-lg bg-brand-gold text-sm font-black text-white shadow-md">
-                        01
-                      </div>
+                  <div class="absolute -top-4 -right-4">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-gold text-xl font-black text-white shadow-lg">
+                      01
                     </div>
                   </div>
 
-                  <div class="p-6">
-                    <div class="mb-5 flex items-start justify-between gap-6">
-                      <div>
-                        <div class="inline-flex items-center rounded-full border border-brand-gold/20 bg-brand-gold/10 px-3 py-1 text-xs font-bold text-brand-gold">
-                          {topServices[0].category}
-                        </div>
-                        <h4 class="mt-3 text-xl font-extrabold text-slate-900 group-hover:text-brand-navy transition-colors">
-                          {topServices[0].title}
-                        </h4>
-                      </div>
-
-                      <div class="shrink-0 rounded-lg border border-slate-200 bg-slate-50 p-3 transition-transform duration-300 group-hover:scale-110">
-                        <svg class="h-6 w-6 text-brand-navy" fill="currentColor" viewBox="0 0 24 24">
+                  <div class="p-7">
+                    <div class="mb-4 flex items-center gap-4">
+                      <div class="rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-gold/5 p-3">
+                        <svg class="h-7 w-7 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
                           <path d={iconPath(topServices[0].icon)} />
                         </svg>
+                      </div>
+                      <div>
+                        <div class="text-xs font-bold uppercase tracking-wider text-brand-gold">
+                          Step 01
+                        </div>
+                        <h4 class="text-xl font-extrabold text-brand-navy">
+                          {topServices[0].title}
+                        </h4>
                       </div>
                     </div>
 
                     <p class="text-slate-600 leading-relaxed">{topServices[0].short}</p>
 
-                    <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
-                      <span class="text-sm font-bold text-brand-navy group-hover:text-brand-gold transition-colors">
-                        Begin Process →
+                    <div class="mt-6 flex items-center justify-end">
+                      <span class="inline-flex items-center gap-2 text-sm font-bold text-brand-navy group-hover:text-brand-gold transition-colors">
+                        Start here
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
                       </span>
                     </div>
                   </div>
@@ -122,98 +145,149 @@ const iconPath = (name) => {
               </a>
             </div>
 
-            <!-- DESCRIPTION (left side on desktop) -->
-            <div class="order-2 md:order-1 mt-8 md:mt-0 md:pr-4 md:flex md:justify-end">
-              <div class="max-w-md md:text-right">
-                <div class="inline-flex items-center gap-2 mb-3 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-600">
-                  Initial Phase
+            <!-- DESCRIPTION (left side on desktop) — UI UPGRADE -->
+            <div class="order-2 md:order-1 md:pr-14 md:text-right">
+              <div class="max-w-md ml-auto">
+                <!-- Top pill -->
+                <div class="inline-flex items-center gap-2 mb-4 rounded-full bg-white/90 backdrop-blur px-4 py-2 border border-slate-200 shadow-sm">
+                  <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+                  <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Phase 1 — Foundation</span>
+                  <span class="text-xs font-semibold text-slate-500">~ 1–2 Days</span>
                 </div>
 
-                <h3 class="text-2xl md:text-3xl font-extrabold text-brand-navy mb-3">
+                <h3 class="text-3xl md:text-4xl font-black text-brand-navy mb-4 leading-tight">
                   Discovery & Assessment
                 </h3>
 
-                <p class="text-slate-600 leading-relaxed mb-5">
-                  We begin with needs analysis and clear objectives so every next step is fast and aligned.
+                <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                  We map your needs, define objectives, and create your custom roadmap — clear, measurable, and ready to execute.
                 </p>
 
-                <ul class="space-y-2 text-sm text-slate-600 md:ml-auto md:w-fit">
-                  <li class="flex items-center gap-2 md:justify-end">
-                    <span class="h-1.5 w-1.5 rounded-full bg-brand-gold/70"></span>
-                    Requirements gathering
-                  </li>
-                  <li class="flex items-center gap-2 md:justify-end">
-                    <span class="h-1.5 w-1.5 rounded-full bg-brand-gold/70"></span>
-                    Initial consultation
-                  </li>
-                  <li class="flex items-center gap-2 md:justify-end">
-                    <span class="h-1.5 w-1.5 rounded-full bg-brand-gold/70"></span>
-                    Timeline planning
-                  </li>
-                </ul>
+                <!-- Mini feature cards (more UI, less bland list) -->
+                <div class="grid gap-3">
+                  <div class="group rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
+                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
+                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
+                        1
+                      </span>
+                      <div class="md:text-right">
+                        <div class="font-extrabold text-slate-800">Requirements gathering</div>
+                        <div class="text-sm text-slate-600">Scope, roles, target markets, and success criteria.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="group rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
+                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
+                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
+                        2
+                      </span>
+                      <div class="md:text-right">
+                        <div class="font-extrabold text-slate-800">Initial consultation</div>
+                        <div class="text-sm text-slate-600">Align expectations + define the action plan.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="group rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
+                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
+                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
+                        3
+                      </span>
+                      <div class="md:text-right">
+                        <div class="font-extrabold text-slate-800">Timeline & budget planning</div>
+                        <div class="text-sm text-slate-600">Milestones, approvals, and delivery dates.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bottom micro CTA -->
+                <div class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy">
+                  <span class="h-1.5 w-1.5 rounded-full bg-brand-gold"></span>
+                  You get a clear plan before we move forward.
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* STEP 2 */}
+        <!-- STEP 2 - HERO CARD with BRAND-NAVY -->
         <div class="relative">
-          <div class="grid md:grid-cols-2 items-start gap-10 md:gap-12">
-            <!-- CARD (left side on desktop) -->
-            <div class="relative order-1 md:order-1 md:pr-8 md:flex md:justify-end">
-              <!-- connector line from center -->
-              <div class="absolute right-0 top-12 hidden h-px w-8 md:block bg-gradient-to-l from-slate-200 to-transparent"></div>
+          <div class="grid md:grid-cols-2 items-center gap-10 md:gap-12">
+            <!-- CARD (left side on desktop) - BRAND NAVY BACKGROUND -->
+            <div class="relative order-1 md:order-1 md:pr-12 md:flex md:justify-end">
+              <!-- directional arrow -->
+              <div class="absolute right-0 top-1/2 hidden md:flex -translate-y-1/2 translate-x-1/2 w-8 h-8 bg-white rounded-full border-2 border-brand-navy items-center justify-center">
+                <svg class="w-4 h-4 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
+                </svg>
+              </div>
 
-              <!-- dot on the center line -->
-              <div class="absolute right-0 top-8 hidden md:block translate-x-1/2">
+              <!-- milestone marker -->
+              <div class="absolute right-0 top-1/2 hidden md:block translate-x-1/2 -translate-y-1/2 z-10">
                 <div class="relative">
-                  <div class="absolute -inset-3 rounded-full bg-brand-gold/12 blur"></div>
-                  <div class="relative h-3 w-3 rounded-full bg-brand-navy ring-4 ring-white"></div>
+                  <div class="absolute -inset-4 rounded-full bg-brand-navy/20 animate-pulse"></div>
+                  <div class="relative h-5 w-5 rounded-full bg-brand-navy border-4 border-white shadow-lg"></div>
                 </div>
               </div>
 
               <a href={`${BASE}services/${topServices[1].slug}/`} class="group block no-underline w-full max-w-[420px] lg:max-w-[440px]">
                 <div
                   class="relative w-full
-                  rounded-xl bg-white
-                  border border-slate-200
-                  shadow-lg
+                  rounded-2xl bg-brand-navy
+                  border-l-8 border-brand-gold
+                  shadow-2xl
                   transition-all duration-500
-                  hover:-translate-y-1 hover:shadow-xl
-                  rotate-[2.5deg] hover:rotate-[-0.5deg]"
+                  hover:-translate-y-2 hover:shadow-3xl
+                  rotate-[2.5deg] hover:rotate-[0deg]"
                 >
-                  <div class="absolute -top-3 -left-3">
-                    <div class="relative">
-                      <div class="absolute -inset-1 bg-brand-navy/15 rounded-lg blur"></div>
-                      <div class="relative flex h-10 w-10 items-center justify-center rounded-lg bg-brand-navy text-sm font-black text-white shadow-md">
-                        02
-                      </div>
+                  <div class="absolute -top-4 -left-4">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-gold text-xl font-black text-white shadow-lg">
+                      02
                     </div>
                   </div>
 
-                  <div class="p-6">
-                    <div class="mb-5 flex items-start justify-between gap-6">
-                      <div class="shrink-0 rounded-lg border border-slate-200 bg-slate-50 p-3 transition-transform duration-300 group-hover:scale-110">
-                        <svg class="h-6 w-6 text-brand-navy" fill="currentColor" viewBox="0 0 24 24">
+                  <div class="p-7">
+                    <div class="mb-4 flex items-center gap-4">
+                      <div class="rounded-xl bg-white/10 p-3 backdrop-blur-sm">
+                        <svg class="h-7 w-7 text-white" fill="currentColor" viewBox="0 0 24 24">
                           <path d={iconPath(topServices[1].icon)} />
                         </svg>
                       </div>
-
-                      <div class="text-right">
-                        <div class="inline-flex items-center rounded-full border border-brand-gold/20 bg-brand-gold/10 px-3 py-1 text-xs font-bold text-brand-gold">
-                          {topServices[1].category}
+                      <div>
+                        <div class="text-xs font-bold uppercase tracking-wider text-brand-gold">
+                          Step 02
                         </div>
-                        <h4 class="mt-3 text-xl font-extrabold text-slate-900 group-hover:text-brand-navy transition-colors">
+                        <h4 class="text-xl font-extrabold text-white">
                           {topServices[1].title}
                         </h4>
                       </div>
                     </div>
 
-                    <p class="text-slate-600 leading-relaxed">{topServices[1].short}</p>
+                    <p class="text-slate-200 leading-relaxed mb-4">
+                      {topServices[1].short}
+                    </p>
 
-                    <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
-                      <span class="text-sm font-bold text-brand-navy group-hover:text-brand-gold transition-colors">
-                        Continue Process →
+                    <!-- Feature pills in navy card -->
+                    <div class="flex flex-wrap gap-2 mb-5">
+                      <span class="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/20">
+                        Legal compliance
+                      </span>
+                      <span class="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/20">
+                        Document verification
+                      </span>
+                      <span class="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/20">
+                        Audit ready
+                      </span>
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-start">
+                      <span class="inline-flex items-center gap-2 text-sm font-bold text-brand-gold group-hover:text-white transition-colors">
+                        Continue on roadmap
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
                       </span>
                     </div>
                   </div>
@@ -221,98 +295,134 @@ const iconPath = (name) => {
               </a>
             </div>
 
-            <!-- DESCRIPTION (right side on desktop) -->
-            <div class="order-2 md:order-2 mt-8 md:mt-0 md:pl-4">
+            <!-- DESCRIPTION (right side on desktop) — UI UPGRADE -->
+            <div class="order-2 md:order-2 md:pl-14">
               <div class="max-w-md">
-                <div class="inline-flex items-center gap-2 mb-3 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-600">
-                  Compliance Phase
+                <!-- Top pill -->
+                <div class="inline-flex items-center gap-2 mb-4 rounded-full bg-white/90 backdrop-blur px-4 py-2 border border-slate-200 shadow-sm">
+                  <span class="h-2 w-2 rounded-full bg-brand-navy"></span>
+                  <span class="text-xs font-extrabold uppercase tracking-wider text-brand-navy">Phase 2 — Compliance</span>
+                  <span class="text-xs font-semibold text-slate-500">~ 2–4 Days</span>
                 </div>
 
-                <h3 class="text-2xl md:text-3xl font-extrabold text-brand-navy mb-3">
+                <h3 class="text-3xl md:text-4xl font-black text-brand-navy mb-4 leading-tight">
                   Verification & Documentation
                 </h3>
 
-                <p class="text-slate-600 leading-relaxed mb-5">
-                  We manage regulatory steps and documentation, ensuring accuracy and audit-ready compliance.
+                <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                  Critical compliance checks and documentation that ensures zero-risk deployment — accurate, complete, and audited.
                 </p>
 
-                <ul class="space-y-2 text-sm text-slate-600">
-                  <li class="flex items-center gap-2">
-                    <span class="h-1.5 w-1.5 rounded-full bg-brand-navy/70"></span>
-                    Legal compliance check
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <span class="h-1.5 w-1.5 rounded-full bg-brand-navy/70"></span>
-                    Document verification
-                  </li>
-                  <li class="flex items-center gap-2">
-                    <span class="h-1.5 w-1.5 rounded-full bg-brand-navy/70"></span>
-                    Audit preparation
-                  </li>
-                </ul>
+                <!-- Mini feature cards -->
+                <div class="grid gap-3">
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
+                    <div class="flex items-start gap-3">
+                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-navy/10 text-brand-navy font-black">
+                        ✓
+                      </span>
+                      <div>
+                        <div class="font-extrabold text-slate-800">Legal & regulatory compliance</div>
+                        <div class="text-sm text-slate-600">We validate every requirement for your destination country.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
+                    <div class="flex items-start gap-3">
+                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-navy/10 text-brand-navy font-black">
+                        ✓
+                      </span>
+                      <div>
+                        <div class="font-extrabold text-slate-800">Document verification & audit</div>
+                        <div class="text-sm text-slate-600">Everything is checked, logged, and prepared for inspection.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
+                    <div class="flex items-start gap-3">
+                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-navy/10 text-brand-navy font-black">
+                        ✓
+                      </span>
+                      <div>
+                        <div class="font-extrabold text-slate-800">Risk assessment & mitigation</div>
+                        <div class="text-sm text-slate-600">We reduce delays by handling issues before submission.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bottom micro CTA -->
+                <div class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy">
+                  <span class="h-1.5 w-1.5 rounded-full bg-brand-navy"></span>
+                  This step protects the entire journey.
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* STEP 3 */}
+        <!-- STEP 3 -->
         <div class="relative">
-          <div class="grid md:grid-cols-2 items-start gap-10 md:gap-12">
+          <div class="grid md:grid-cols-2 items-center gap-10 md:gap-12">
             <!-- CARD (right side on desktop) -->
-            <div class="relative order-1 md:order-2 md:pl-8">
-              <!-- connector line from center -->
-              <div class="absolute left-0 top-12 hidden h-px w-8 md:block bg-gradient-to-r from-slate-200 to-transparent"></div>
+            <div class="relative order-1 md:order-2 md:pl-12">
+              <!-- directional arrow -->
+              <div class="absolute left-0 top-1/2 hidden md:flex -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full border-2 border-brand-gold items-center justify-center">
+                <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
 
-              <!-- dot on the center line -->
-              <div class="absolute left-0 top-8 hidden md:block -translate-x-1/2">
+              <!-- milestone marker -->
+              <div class="absolute left-0 top-1/2 hidden md:block -translate-x-1/2 -translate-y-1/2 z-10">
                 <div class="relative">
-                  <div class="absolute -inset-3 rounded-full bg-brand-gold/12 blur"></div>
-                  <div class="relative h-3 w-3 rounded-full bg-brand-gold ring-4 ring-white"></div>
+                  <div class="absolute -inset-4 rounded-full bg-brand-gold/20 animate-pulse"></div>
+                  <div class="relative h-5 w-5 rounded-full bg-brand-gold border-4 border-white shadow-lg"></div>
                 </div>
               </div>
 
               <a href={`${BASE}services/${topServices[2].slug}/`} class="group block no-underline">
                 <div
                   class="relative w-full max-w-[420px] lg:max-w-[440px] mx-auto md:mx-0
-                  rounded-xl bg-white
-                  border border-slate-200
-                  shadow-lg
+                  rounded-2xl bg-white
+                  border-l-8 border-brand-gold
+                  shadow-xl
                   transition-all duration-500
-                  hover:-translate-y-1 hover:shadow-xl
-                  rotate-[-2deg] hover:rotate-[0.5deg]"
+                  hover:-translate-y-2 hover:shadow-2xl
+                  rotate-[-2deg] hover:rotate-[0deg]"
                 >
-                  <div class="absolute -top-3 -right-3">
-                    <div class="relative">
-                      <div class="absolute -inset-1 bg-brand-gold/20 rounded-lg blur"></div>
-                      <div class="relative flex h-10 w-10 items-center justify-center rounded-lg bg-brand-gold text-sm font-black text-white shadow-md">
-                        03
-                      </div>
+                  <div class="absolute -top-4 -right-4">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-gold text-xl font-black text-white shadow-lg">
+                      03
                     </div>
                   </div>
 
-                  <div class="p-6">
-                    <div class="mb-5 flex items-start justify-between gap-6">
-                      <div>
-                        <div class="inline-flex items-center rounded-full border border-brand-gold/20 bg-brand-gold/10 px-3 py-1 text-xs font-bold text-brand-gold">
-                          {topServices[2].category}
-                        </div>
-                        <h4 class="mt-3 text-xl font-extrabold text-slate-900 group-hover:text-brand-navy transition-colors">
-                          {topServices[2].title}
-                        </h4>
-                      </div>
-
-                      <div class="shrink-0 rounded-lg border border-slate-200 bg-slate-50 p-3 transition-transform duration-300 group-hover:scale-110">
-                        <svg class="h-6 w-6 text-brand-navy" fill="currentColor" viewBox="0 0 24 24">
+                  <div class="p-7">
+                    <div class="mb-4 flex items-center gap-4">
+                      <div class="rounded-xl bg-gradient-to-br from-brand-gold/20 to-brand-gold/5 p-3">
+                        <svg class="h-7 w-7 text-brand-gold" fill="currentColor" viewBox="0 0 24 24">
                           <path d={iconPath(topServices[2].icon)} />
                         </svg>
+                      </div>
+                      <div>
+                        <div class="text-xs font-bold uppercase tracking-wider text-brand-gold">
+                          Step 03
+                        </div>
+                        <h4 class="text-xl font-extrabold text-brand-navy">
+                          {topServices[2].title}
+                        </h4>
                       </div>
                     </div>
 
                     <p class="text-slate-600 leading-relaxed">{topServices[2].short}</p>
 
-                    <div class="mt-6 flex items-center justify-between border-t border-slate-100 pt-5">
-                      <span class="text-sm font-bold text-brand-navy group-hover:text-brand-gold transition-colors">
-                        Finalize Process →
+                    <div class="mt-6 flex items-center justify-end">
+                      <span class="inline-flex items-center gap-2 text-sm font-bold text-brand-navy group-hover:text-brand-gold transition-colors">
+                        Complete journey
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
                       </span>
                     </div>
                   </div>
@@ -320,68 +430,73 @@ const iconPath = (name) => {
               </a>
             </div>
 
-            <!-- DESCRIPTION (left side on desktop) -->
-            <div class="order-2 md:order-1 mt-8 md:mt-0 md:pr-4 md:flex md:justify-end">
-              <div class="max-w-md md:text-right">
-                <div class="inline-flex items-center gap-2 mb-3 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-600">
-                  Deployment Phase
+            <!-- DESCRIPTION (left side on desktop) — UI UPGRADE -->
+            <div class="order-2 md:order-1 md:pr-14 md:text-right">
+              <div class="max-w-md ml-auto">
+                <!-- Top pill -->
+                <div class="inline-flex items-center gap-2 mb-4 rounded-full bg-white/90 backdrop-blur px-4 py-2 border border-slate-200 shadow-sm">
+                  <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+                  <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Phase 3 — Delivery</span>
+                  <span class="text-xs font-semibold text-slate-500">~ Ongoing</span>
                 </div>
 
-                <h3 class="text-2xl md:text-3xl font-extrabold text-brand-navy mb-3">
+                <h3 class="text-3xl md:text-4xl font-black text-brand-navy mb-4 leading-tight">
                   Support & Implementation
                 </h3>
 
-                <p class="text-slate-600 leading-relaxed mb-5">
-                  We stay with you through deployment and beyond—support, follow-ups, and continuous optimization.
+                <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                  Full deployment support with follow-ups, assistance, and continuous optimization — so outcomes stay strong.
                 </p>
 
-                <ul class="space-y-2 text-sm text-slate-600 md:ml-auto md:w-fit">
-                  <li class="flex items-center gap-2 md:justify-end">
-                    <span class="h-1.5 w-1.5 rounded-full bg-brand-gold/70"></span>
-                    24/7 dedicated support
-                  </li>
-                  <li class="flex items-center gap-2 md:justify-end">
-                    <span class="h-1.5 w-1.5 rounded-full bg-brand-gold/70"></span>
-                    Deployment assistance
-                  </li>
-                  <li class="flex items-center gap-2 md:justify-end">
-                    <span class="h-1.5 w-1.5 rounded-full bg-brand-gold/70"></span>
-                    Continuous optimization
-                  </li>
-                </ul>
+                <!-- Mini feature cards -->
+                <div class="grid gap-3">
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
+                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
+                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
+                        24
+                      </span>
+                      <div class="md:text-right">
+                        <div class="font-extrabold text-slate-800">24/7 dedicated support</div>
+                        <div class="text-sm text-slate-600">Always available when issues appear.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
+                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
+                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
+                        ↗
+                      </span>
+                      <div class="md:text-right">
+                        <div class="font-extrabold text-slate-800">Deployment assistance</div>
+                        <div class="text-sm text-slate-600">Onboarding, arrival support, and coordination.</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
+                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
+                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
+                        ✦
+                      </span>
+                      <div class="md:text-right">
+                        <div class="font-extrabold text-slate-800">Continuous optimization</div>
+                        <div class="text-sm text-slate-600">We improve the process based on feedback.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Bottom micro CTA -->
+                <div class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy">
+                  <span class="h-1.5 w-1.5 rounded-full bg-brand-gold"></span>
+                  We stay with you after delivery.
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- CTA -->
-    <div class="mt-20 text-center">
-      <div class="mx-auto max-w-4xl rounded-xl bg-white/80 backdrop-blur-sm border border-slate-200 shadow-lg p-8 md:p-12">
-        <h3 class="text-3xl font-extrabold text-brand-navy mb-3">Ready to Start?</h3>
-        <p class="text-slate-600 max-w-2xl mx-auto mb-8">
-          Join employers and candidates who successfully navigate the process with MELI's structured workflow.
-        </p>
-
-        <div class="flex flex-col sm:flex-row justify-center gap-4">
-          <a
-            href={`${BASE}contact/`}
-            class="group rounded-lg bg-brand-navy px-8 py-4 text-lg font-bold text-white shadow-lg
-              transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
-          >
-            Get Started Today
-            <span class="ml-2 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-          </a>
-
-          <a
-            href={`${BASE}services/`}
-            class="rounded-lg border border-slate-300 bg-white px-8 py-4 text-lg font-bold text-brand-navy shadow-sm
-              transition-all duration-300 hover:border-brand-gold/40 hover:text-brand-gold hover:shadow-md"
-          >
-            View All Services
-          </a>
-        </div>
       </div>
     </div>
   </div>

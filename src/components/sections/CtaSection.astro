@@ -144,36 +144,7 @@ const description =
       </section>
 
       <!-- Logos only (NO CARDS) -->
-      <section class="mt-12">
-        <div class="flex items-end justify-between gap-6">
-          <div>
-            <h2 class="text-2xl font-bold text-gray-900">Trusted by</h2>
-            <p class="mt-2 text-gray-600">A selection of our valued partners and clients.</p>
-          </div>
-
-          <a
-            href={`${BASE}contact/`}
-            class="hidden rounded-xl bg-brand-navy px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:opacity-95 sm:inline-flex"
-          >
-            Become a Partner
-          </a>
-        </div>
-
-        <!-- Clean logo grid (bigger + consistent + no grayscale) -->
-        <div class="mt-8 grid grid-cols-2 items-center gap-x-12 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
-          {partners.map((p) => (
-            <div class="flex items-center justify-center">
-              <img
-                src={p.logo}
-                alt={`${p.name} logo`}
-                loading="lazy"
-                decoding="async"
-                class="h-16 sm:h-20 md:h-24 w-auto max-w-[240px] object-contain opacity-95 transition duration-200 hover:scale-[1.05] hover:drop-shadow-[0_14px_18px_rgba(0,0,0,0.12)]"
-              />
-            </div>
-          ))}
-        </div>
-      </section>
+      
 
       <!-- CTA -->
       <section class="mt-14">
