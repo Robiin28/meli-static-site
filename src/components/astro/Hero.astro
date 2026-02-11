@@ -3,11 +3,9 @@ import HeroCursor from "../react/HeroCursor";
 const BASE = import.meta.env.BASE_URL;
 ---
 
-<section class="hero-flow relative min-h-screen overflow-hidden text-white">
+<section class="hero-flow relative min-h-[82vh] overflow-hidden text-white md:min-h-screen">
   <!-- BASE SURFACE (same as nav) -->
   <div class="absolute inset-0 hero-flow__surface"></div>
-
-  <!-- ✅ REMOVED: TOP DENSITY CAP + TOP GRADIENT FADE -->
 
   <!-- FLOWING GRADIENT ACCENTS -->
   <div class="pointer-events-none absolute inset-0 hero-flow__accents">
@@ -20,31 +18,31 @@ const BASE = import.meta.env.BASE_URL;
   </div>
 
   <!-- CONTENT -->
-  <div class="relative container mx-auto flex min-h-screen items-center justify-center px-4">
+  <div class="relative container mx-auto flex min-h-[82vh] items-center justify-center px-4 md:min-h-screen">
     <div class="max-w-3xl text-center">
-      <div class="inline-flex items-center gap-2 rounded-full bg-white/8 px-3 py-1 text-xs ring-1 ring-white/15">
+      <div class="inline-flex items-center gap-2 rounded-full bg-white/8 px-3 py-1 text-[11px] ring-1 ring-white/15 sm:text-xs">
         <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
         Foreign Employment Agency
       </div>
 
-      <h1 class="mt-6 text-4xl font-extrabold tracking-tight md:text-6xl">
+      <h1 class="mt-5 text-3xl font-extrabold tracking-tight sm:text-4xl md:mt-6 md:text-6xl">
         Hire better.
         <span class="block text-white/85">Deploy faster.</span>
       </h1>
 
-      <p class="mx-auto mt-4 max-w-xl text-base text-white/70 md:text-lg">
+      <p class="mx-auto mt-3 max-w-xl text-[15px] leading-6 text-white/70 md:mt-4 md:text-lg md:leading-7">
         Meli Private Employment Agency connects employers with verified overseas candidates —
         clearly, compliantly, and without friction.
-        <span class="ml-1 inline-block align-middle">
+        <span class="ml-1 hidden sm:inline-block align-middle">
           <HeroCursor client:load />
         </span>
       </p>
 
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <div class="mt-6 flex flex-wrap justify-center gap-3 md:mt-8 md:gap-4">
         <a
           href={`${BASE}contact/`}
           class="no-underline rounded-2xl bg-brand-gold px-6 py-3 text-sm font-extrabold text-slate-900
-                 shadow-xl hover:opacity-95 active:scale-[0.98] transition"
+                 shadow-xl transition hover:opacity-95 active:scale-[0.98]"
         >
           Get started
         </a>
@@ -52,20 +50,25 @@ const BASE = import.meta.env.BASE_URL;
         <a
           href={`${BASE}services/`}
           class="no-underline rounded-2xl bg-white/8 px-6 py-3 text-sm font-extrabold
-                 ring-1 ring-white/15 hover:bg-white/12 active:scale-[0.98] transition"
+                 ring-1 ring-white/15 transition hover:bg-white/12 active:scale-[0.98]"
         >
           Services →
         </a>
       </div>
+
+      <!-- Optional: small helper line (mobile-friendly, low height) -->
+      <p class="mx-auto mt-4 max-w-md text-xs text-white/55 md:mt-5 md:text-sm">
+        Fast screening • Compliance-first processing • Transparent timelines
+      </p>
     </div>
   </div>
 </section>
 
 <style>
-  /* ✅ Use your global CSS variables */
- .hero-flow__surface {
-  background-color: rgb(var(--brand-navy));
-}
+  /* ✅ Uses your global CSS variables */
+  .hero-flow__surface {
+    background-color: rgb(var(--brand-navy));
+  }
 
   .hero-flow__layer {
     will-change: transform, opacity, filter;
@@ -108,6 +111,11 @@ const BASE = import.meta.env.BASE_URL;
     animation: goldLiftC 12.5s ease-in-out infinite;
   }
 
+  /* d is only used for blend; keep simple (no bg needed unless you set one elsewhere) */
+  .hero-flow__layer--d {
+    animation: shimmerSweep 6.6s ease-in-out infinite;
+  }
+
   .hero-flow__layer--e {
     background: radial-gradient(
       420px 420px at 50% 54%,
@@ -125,40 +133,103 @@ const BASE = import.meta.env.BASE_URL;
   }
 
   @keyframes goldDriftA {
-    0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
-    20%  { transform: translate3d(-58px, 28px, 0) scale(1.10) rotate(1.8deg); opacity: 0.95; }
-    45%  { transform: translate3d(46px, -34px, 0) scale(1.06) rotate(-1.6deg); opacity: 1; }
-    70%  { transform: translate3d(-32px, -18px, 0) scale(1.12) rotate(1.2deg); opacity: 0.96; }
-    100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
+    0% {
+      transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    20% {
+      transform: translate3d(-58px, 28px, 0) scale(1.1) rotate(1.8deg);
+      opacity: 0.95;
+    }
+    45% {
+      transform: translate3d(46px, -34px, 0) scale(1.06) rotate(-1.6deg);
+      opacity: 1;
+    }
+    70% {
+      transform: translate3d(-32px, -18px, 0) scale(1.12) rotate(1.2deg);
+      opacity: 0.96;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      opacity: 1;
+    }
   }
 
   @keyframes goldDriftB {
-    0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 0.92; }
-    25%  { transform: translate3d(64px, -34px, 0) scale(1.08) rotate(-2deg); opacity: 1; }
-    55%  { transform: translate3d(-52px, 44px, 0) scale(1.05) rotate(1.7deg); opacity: 0.90; }
-    80%  { transform: translate3d(22px, 8px, 0) scale(1.07) rotate(-1deg); opacity: 0.95; }
-    100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 0.92; }
+    0% {
+      transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      opacity: 0.92;
+    }
+    25% {
+      transform: translate3d(64px, -34px, 0) scale(1.08) rotate(-2deg);
+      opacity: 1;
+    }
+    55% {
+      transform: translate3d(-52px, 44px, 0) scale(1.05) rotate(1.7deg);
+      opacity: 0.9;
+    }
+    80% {
+      transform: translate3d(22px, 8px, 0) scale(1.07) rotate(-1deg);
+      opacity: 0.95;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+      opacity: 0.92;
+    }
   }
 
   @keyframes goldLiftC {
-    0%   { transform: translate3d(0,0,0) scale(1); opacity: 0.88; }
-    30%  { transform: translate3d(34px, -46px, 0) scale(1.08); opacity: 1; }
-    60%  { transform: translate3d(-38px, 28px, 0) scale(1.04); opacity: 0.92; }
-    85%  { transform: translate3d(14px, -10px, 0) scale(1.06); opacity: 0.96; }
-    100% { transform: translate3d(0,0,0) scale(1); opacity: 0.88; }
+    0% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.88;
+    }
+    30% {
+      transform: translate3d(34px, -46px, 0) scale(1.08);
+      opacity: 1;
+    }
+    60% {
+      transform: translate3d(-38px, 28px, 0) scale(1.04);
+      opacity: 0.92;
+    }
+    85% {
+      transform: translate3d(14px, -10px, 0) scale(1.06);
+      opacity: 0.96;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0.88;
+    }
   }
 
   @keyframes shimmerSweep {
-    0%   { transform: translate3d(-90px, 40px, 0) rotate(0deg); opacity: 0.25; }
-    30%  { transform: translate3d(85px, -30px, 0) rotate(-2deg); opacity: 0.8; }
-    60%  { transform: translate3d(-65px, -18px, 0) rotate(1.6deg); opacity: 0.4; }
-    100% { transform: translate3d(-90px, 40px, 0) rotate(0deg); opacity: 0.25; }
+    0% {
+      transform: translate3d(-90px, 40px, 0) rotate(0deg);
+      opacity: 0.25;
+    }
+    30% {
+      transform: translate3d(85px, -30px, 0) rotate(-2deg);
+      opacity: 0.8;
+    }
+    60% {
+      transform: translate3d(-65px, -18px, 0) rotate(1.6deg);
+      opacity: 0.4;
+    }
+    100% {
+      transform: translate3d(-90px, 40px, 0) rotate(0deg);
+      opacity: 0.25;
+    }
   }
 
   @keyframes bloomPulse {
-    0%   { opacity: 0.16; }
-    50%  { opacity: 0.36; }
-    100% { opacity: 0.16; }
+    0% {
+      opacity: 0.16;
+    }
+    50% {
+      opacity: 0.36;
+    }
+    100% {
+      opacity: 0.16;
+    }
   }
 
   .hero-flow::before {
@@ -176,10 +247,15 @@ const BASE = import.meta.env.BASE_URL;
   }
 
   @keyframes glowBreath {
-    0% { opacity: 0.6; }
-    100% { opacity: 1; }
+    0% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
+  /* ✅ Mobile tuning: lighter filters + smaller gradients + reduced motion distances */
   @media (max-width: 768px) {
     .hero-flow__layer--a,
     .hero-flow__layer--b,
@@ -197,15 +273,17 @@ const BASE = import.meta.env.BASE_URL;
         transparent 76%
       );
     }
+
     .hero-flow__layer--b {
       background: radial-gradient(
         340px 240px at 40% 72%,
-        rgba(255, 230, 140, 0.30),
+        rgba(255, 230, 140, 0.3),
         rgba(255, 200, 95, 0.13) 42%,
         rgba(185, 195, 225, 0.04) 62%,
         transparent 80%
       );
     }
+
     .hero-flow__layer--c {
       background: radial-gradient(
         360px 220px at 50% 106%,
@@ -215,6 +293,7 @@ const BASE = import.meta.env.BASE_URL;
         transparent 82%
       );
     }
+
     .hero-flow__layer--e {
       background: radial-gradient(
         300px 300px at 50% 54%,
@@ -225,28 +304,69 @@ const BASE = import.meta.env.BASE_URL;
     }
 
     @keyframes goldDriftA {
-      0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
-      25%  { transform: translate3d(-30px, 16px, 0) scale(1.07) rotate(1.2deg); opacity: 0.96; }
-      55%  { transform: translate3d(26px, -18px, 0) scale(1.04) rotate(-1deg); opacity: 1; }
-      100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
-    }
-    @keyframes goldDriftB {
-      0%   { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 0.92; }
-      30%  { transform: translate3d(34px, -18px, 0) scale(1.06) rotate(-1.2deg); opacity: 1; }
-      60%  { transform: translate3d(-28px, 24px, 0) scale(1.03) rotate(1deg); opacity: 0.90; }
-      100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 0.92; }
-    }
-    @keyframes goldLiftC {
-      0%   { transform: translate3d(0,0,0) scale(1); opacity: 0.88; }
-      45%  { transform: translate3d(18px, -22px, 0) scale(1.05); opacity: 1; }
-      100% { transform: translate3d(0,0,0) scale(1); opacity: 0.88; }
+      0% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+        opacity: 1;
+      }
+      25% {
+        transform: translate3d(-30px, 16px, 0) scale(1.07) rotate(1.2deg);
+        opacity: 0.96;
+      }
+      55% {
+        transform: translate3d(26px, -18px, 0) scale(1.04) rotate(-1deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+        opacity: 1;
+      }
     }
 
-    .hero-flow__layer--d { animation-duration: 4.2s; }
+    @keyframes goldDriftB {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+        opacity: 0.92;
+      }
+      30% {
+        transform: translate3d(34px, -18px, 0) scale(1.06) rotate(-1.2deg);
+        opacity: 1;
+      }
+      60% {
+        transform: translate3d(-28px, 24px, 0) scale(1.03) rotate(1deg);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+        opacity: 0.92;
+      }
+    }
+
+    @keyframes goldLiftC {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.88;
+      }
+      45% {
+        transform: translate3d(18px, -22px, 0) scale(1.05);
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 0.88;
+      }
+    }
+
+    .hero-flow__layer--d {
+      animation-duration: 4.2s;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-flow__layer { animation: none !important; }
-    .hero-flow::before { animation: none !important; }
+    .hero-flow__layer {
+      animation: none !important;
+    }
+    .hero-flow::before {
+      animation: none !important;
+    }
   }
 </style>

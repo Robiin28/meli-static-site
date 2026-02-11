@@ -1,0 +1,186 @@
+---
+import HeroCursor from "../react/HeroCursor";
+
+const {
+  base = "/",
+  badge = "Foreign Employment Agency",
+  title = "Hire better.",
+  titleMuted = "Deploy faster.",
+  description = "Meli Private Employment Agency connects employers with verified overseas candidates — clearly, compliantly, and without friction.",
+  // Image settings
+  imageSrc = "",
+  imageAlt = "MELI",
+  // Small “Why Us” bullets (keep 3–4)
+  bullets = [
+    { title: "Verified candidates", text: "Screened profiles with clear documentation." },
+    { title: "Compliance-first", text: "Process aligned with regulations and timelines." },
+    { title: "Fast deployment", text: "Structured pipeline from selection to travel." },
+  ],
+  // CTAs
+  primaryHref = `${base}contact/`,
+  primaryLabel = "Get started",
+  secondaryHref = `${base}services/`,
+  secondaryLabel = "Services →",
+} = Astro.props;
+---
+
+<section class="hero-flow relative overflow-hidden text-white min-h-[88vh] md:min-h-screen">
+  <!-- BASE SURFACE -->
+  <div class="absolute inset-0 hero-flow__surface"></div>
+
+  <!-- FLOWING GRADIENT ACCENTS -->
+  <div class="pointer-events-none absolute inset-0 hero-flow__accents">
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--a mix-blend-screen"></div>
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--b mix-blend-screen"></div>
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--c mix-blend-screen"></div>
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--d mix-blend-overlay"></div>
+    <div class="absolute inset-0 hero-flow__layer hero-flow__layer--e mix-blend-screen"></div>
+    <div class="absolute inset-0 opacity-[0.05] mix-blend-overlay hero-flow__grain"></div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="relative container mx-auto px-4 pt-24 pb-14 md:pt-28 md:pb-20">
+    <div class="grid items-center gap-10 md:grid-cols-2 md:gap-14">
+      <!-- LEFT -->
+      <div class="text-center md:text-left">
+        <div class="inline-flex items-center gap-2 rounded-full bg-white/8 px-3 py-1 text-[11px] ring-1 ring-white/15 sm:text-xs">
+          <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+          {badge}
+        </div>
+
+        <h1 class="mt-5 text-3xl font-extrabold tracking-tight sm:text-4xl md:mt-6 md:text-6xl">
+          {title}
+          <span class="block text-white/85">{titleMuted}</span>
+        </h1>
+
+        <p class="mx-auto mt-3 max-w-xl text-[15px] leading-6 text-white/70 md:mx-0 md:mt-4 md:text-lg md:leading-7">
+          {description}
+          <span class="ml-1 hidden sm:inline-block align-middle">
+            <HeroCursor client:load />
+          </span>
+        </p>
+
+        <div class="mt-6 flex flex-wrap justify-center gap-3 md:justify-start md:mt-8 md:gap-4">
+          <a
+            href={primaryHref}
+            class="no-underline rounded-2xl bg-brand-gold px-6 py-3 text-sm font-extrabold text-slate-900 shadow-xl transition hover:opacity-95 active:scale-[0.98]"
+          >
+            {primaryLabel}
+          </a>
+
+          <a
+            href={secondaryHref}
+            class="no-underline rounded-2xl bg-white/8 px-6 py-3 text-sm font-extrabold ring-1 ring-white/15 transition hover:bg-white/12 active:scale-[0.98]"
+          >
+            {secondaryLabel}
+          </a>
+        </div>
+
+        <!-- WHY-US bullets merged into hero -->
+        <div class="mt-8 grid gap-3 sm:grid-cols-2 md:mt-10">
+          {bullets.map((b) => (
+            <div class="rounded-2xl bg-white/6 p-4 ring-1 ring-white/10">
+              <div class="text-sm font-extrabold">{b.title}</div>
+              <div class="mt-1 text-xs leading-5 text-white/70">{b.text}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- RIGHT (image) -->
+      <div class="relative">
+        <div class="absolute -inset-4 rounded-[28px] bg-gradient-to-tr from-brand-gold/15 via-white/5 to-transparent blur-2xl"></div>
+
+        <div class="relative overflow-hidden rounded-[28px] ring-1 ring-white/10 bg-white/5">
+          {imageSrc ? (
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              class="h-[260px] w-full object-cover sm:h-[320px] md:h-[460px]"
+              loading="eager"
+              decoding="async"
+            />
+          ) : (
+            <div class="flex h-[260px] items-center justify-center text-white/50 sm:h-[320px] md:h-[460px]">
+              Add hero image
+            </div>
+          )}
+
+          <div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-flow__surface { background-color: rgb(var(--brand-navy)); }
+
+  .hero-flow__layer { will-change: transform, opacity, filter; transform: translate3d(0,0,0); }
+
+  .hero-flow__layer--a {
+    background: radial-gradient(520px 360px at 58% 62%, rgba(255,200,70,.45), rgba(255,170,55,.18) 40%, rgba(200,205,230,.06) 60%, transparent 75%);
+    filter: blur(4px) saturate(1.25) brightness(1.08);
+    animation: goldDriftA 9.5s ease-in-out infinite;
+  }
+  .hero-flow__layer--b {
+    background: radial-gradient(480px 340px at 38% 74%, rgba(255,230,140,.32), rgba(255,200,95,.14) 40%, rgba(185,195,225,.05) 60%, transparent 78%);
+    filter: blur(6px) saturate(1.18) brightness(1.05);
+    animation: goldDriftB 11s ease-in-out infinite;
+  }
+  .hero-flow__layer--c {
+    background: radial-gradient(520px 320px at 50% 105%, rgba(255,215,95,.26), rgba(255,190,80,.12) 45%, rgba(180,190,220,.04) 65%, transparent 80%);
+    filter: blur(8px) saturate(1.15) brightness(1.03);
+    animation: goldLiftC 12.5s ease-in-out infinite;
+  }
+  .hero-flow__layer--d { animation: shimmerSweep 6.6s ease-in-out infinite; }
+  .hero-flow__layer--e {
+    background: radial-gradient(420px 420px at 50% 54%, rgba(255,215,110,.14), rgba(255,195,90,.06) 45%, transparent 75%);
+    filter: blur(10px) saturate(1.2) brightness(1.05);
+    animation: bloomPulse 5.2s ease-in-out infinite;
+  }
+
+  .hero-flow__grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
+  }
+
+  @keyframes goldDriftA {
+    0% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
+    20% { transform: translate3d(-58px, 28px, 0) scale(1.10) rotate(1.8deg); opacity: .95; }
+    45% { transform: translate3d(46px, -34px, 0) scale(1.06) rotate(-1.6deg); opacity: 1; }
+    70% { transform: translate3d(-32px, -18px, 0) scale(1.12) rotate(1.2deg); opacity: .96; }
+    100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: 1; }
+  }
+  @keyframes goldDriftB {
+    0% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: .92; }
+    25% { transform: translate3d(64px, -34px, 0) scale(1.08) rotate(-2deg); opacity: 1; }
+    55% { transform: translate3d(-52px, 44px, 0) scale(1.05) rotate(1.7deg); opacity: .90; }
+    80% { transform: translate3d(22px, 8px, 0) scale(1.07) rotate(-1deg); opacity: .95; }
+    100% { transform: translate3d(0,0,0) scale(1) rotate(0deg); opacity: .92; }
+  }
+  @keyframes goldLiftC {
+    0% { transform: translate3d(0,0,0) scale(1); opacity: .88; }
+    30% { transform: translate3d(34px, -46px, 0) scale(1.08); opacity: 1; }
+    60% { transform: translate3d(-38px, 28px, 0) scale(1.04); opacity: .92; }
+    85% { transform: translate3d(14px, -10px, 0) scale(1.06); opacity: .96; }
+    100% { transform: translate3d(0,0,0) scale(1); opacity: .88; }
+  }
+  @keyframes shimmerSweep {
+    0% { transform: translate3d(-90px, 40px, 0) rotate(0deg); opacity: .25; }
+    30% { transform: translate3d(85px, -30px, 0) rotate(-2deg); opacity: .8; }
+    60% { transform: translate3d(-65px, -18px, 0) rotate(1.6deg); opacity: .4; }
+    100% { transform: translate3d(-90px, 40px, 0) rotate(0deg); opacity: .25; }
+  }
+  @keyframes bloomPulse { 0% {opacity:.16;} 50% {opacity:.36;} 100% {opacity:.16;} }
+
+  @media (max-width: 768px) {
+    .hero-flow__layer--a,.hero-flow__layer--b,.hero-flow__layer--c,.hero-flow__layer--e {
+      filter: blur(3px) saturate(1.12) brightness(1.02);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-flow__layer { animation: none !important; }
+  }
+</style>
