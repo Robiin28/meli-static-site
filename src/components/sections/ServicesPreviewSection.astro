@@ -28,7 +28,7 @@ const iconPath = (name: string) => {
 
   <div class="relative container mx-auto px-4">
     <!-- Header -->
-    <div class="mb-20 text-center">
+    <div class="mb-14 md:mb-20 text-center">
       <span class="inline-flex items-center gap-2 mb-6 rounded-full bg-brand-gold/10 border border-brand-gold/20 px-5 py-2.5 text-sm font-bold text-brand-gold backdrop-blur-sm">
         <span class="h-2 w-2 rounded-full bg-brand-gold shadow-[0_0_0_6px_rgba(199,160,55,0.10)]"></span>
         Our Roadmap to Success
@@ -46,8 +46,8 @@ const iconPath = (name: string) => {
       </p>
     </div>
 
-    <!-- Roadmap Visual Guide -->
-    <div class="flex justify-center mb-16">
+    <!-- Roadmap Visual Guide (hide on small for less height) -->
+    <div class="hidden md:flex justify-center mb-16">
       <div class="inline-flex items-center gap-8 md:gap-16 bg-white/80 backdrop-blur-sm px-8 py-4 rounded-full border border-slate-200 shadow-sm">
         <div class="flex items-center gap-2">
           <span class="flex h-6 w-6 items-center justify-center rounded-full bg-brand-gold text-xs font-bold text-white">1</span>
@@ -66,8 +66,54 @@ const iconPath = (name: string) => {
       </div>
     </div>
 
-    <!-- Workflow -->
-    <div class="relative">
+    <!-- ✅ MOBILE: cards only (NO tilt, no descriptions) -->
+    <div class="md:hidden">
+      <div class="space-y-6">
+        {topServices.map((s, i) => (
+          <a href={`${BASE}services/${s.slug}/`} class="block no-underline">
+            <div class={`relative rounded-2xl shadow-xl border-l-8 ${i === 1 ? "bg-brand-navy border-brand-gold" : "bg-white border-brand-gold"}`}>
+              <div class={`absolute -top-3 ${i === 1 ? "-left-3" : "-right-3"}`}>
+                <div class="flex h-11 w-11 items-center justify-center rounded-full bg-brand-gold text-lg font-black text-white shadow-lg">
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+              </div>
+
+              <div class="p-6">
+                <div class="mb-4 flex items-center gap-4">
+                  <div class={`rounded-xl p-3 ${i === 1 ? "bg-white/10" : "bg-brand-gold/10"}`}>
+                    <svg class={`h-7 w-7 ${i === 1 ? "text-white" : "text-brand-gold"}`} fill="currentColor" viewBox="0 0 24 24">
+                      <path d={iconPath(s.icon)} />
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0">
+                    <div class={`text-xs font-bold uppercase tracking-wider ${i === 1 ? "text-brand-gold" : "text-brand-gold"}`}>
+                      Step {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <h4 class={`text-lg font-extrabold truncate ${i === 1 ? "text-white" : "text-brand-navy"}`}>
+                      {s.title}
+                    </h4>
+                  </div>
+                </div>
+
+                <p class={`leading-relaxed text-sm ${i === 1 ? "text-white/80" : "text-slate-600"}`}>
+                  {s.short}
+                </p>
+
+                <div class={`mt-5 flex items-center justify-between border-t pt-4 ${i === 1 ? "border-white/10" : "border-slate-100"}`}>
+                  <span class={`text-sm font-bold ${i === 1 ? "text-brand-gold" : "text-brand-navy"}`}>
+                    View details →
+                  </span>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- ✅ DESKTOP/TABLET: full roadmap (tilt + descriptions) -->
+    <div class="relative hidden md:block">
       <!-- Central road line -->
       <div
         class="absolute left-1/2 top-0 bottom-0 hidden w-0.5 -translate-x-1/2 md:block"
@@ -80,16 +126,14 @@ const iconPath = (name: string) => {
         <!-- STEP 1 -->
         <div class="relative">
           <div class="grid md:grid-cols-2 items-center gap-10 md:gap-12">
-            <!-- CARD (right side on desktop) -->
+            <!-- CARD (right side) -->
             <div class="relative order-1 md:order-2 md:pl-12">
-              <!-- directional arrow -->
               <div class="absolute left-0 top-1/2 hidden md:flex -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full border-2 border-brand-gold items-center justify-center">
                 <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
                 </svg>
               </div>
 
-              <!-- milestone marker -->
               <div class="absolute left-0 top-1/2 hidden md:block -translate-x-1/2 -translate-y-1/2 z-10">
                 <div class="relative">
                   <div class="absolute -inset-4 rounded-full bg-brand-gold/20 animate-pulse"></div>
@@ -100,11 +144,8 @@ const iconPath = (name: string) => {
               <a href={`${BASE}services/${topServices[0].slug}/`} class="group block no-underline">
                 <div
                   class="relative w-full max-w-[420px] lg:max-w-[440px] mx-auto md:mx-0
-                  rounded-2xl bg-white
-                  border-l-8 border-brand-gold
-                  shadow-xl
-                  transition-all duration-500
-                  hover:-translate-y-2 hover:shadow-2xl
+                  rounded-2xl bg-white border-l-8 border-brand-gold shadow-xl
+                  transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl
                   rotate-[-2.5deg] hover:rotate-[0deg]"
                 >
                   <div class="absolute -top-4 -right-4">
@@ -121,12 +162,8 @@ const iconPath = (name: string) => {
                         </svg>
                       </div>
                       <div>
-                        <div class="text-xs font-bold uppercase tracking-wider text-brand-gold">
-                          Step 01
-                        </div>
-                        <h4 class="text-xl font-extrabold text-brand-navy">
-                          {topServices[0].title}
-                        </h4>
+                        <div class="text-xs font-bold uppercase tracking-wider text-brand-gold">Step 01</div>
+                        <h4 class="text-xl font-extrabold text-brand-navy">{topServices[0].title}</h4>
                       </div>
                     </div>
 
@@ -145,10 +182,9 @@ const iconPath = (name: string) => {
               </a>
             </div>
 
-            <!-- DESCRIPTION (left side on desktop) — UI UPGRADE -->
+            <!-- DESCRIPTION -->
             <div class="order-2 md:order-1 md:pr-14 md:text-right">
               <div class="max-w-md ml-auto">
-                <!-- Top pill -->
                 <div class="inline-flex items-center gap-2 mb-4 rounded-full bg-white/90 backdrop-blur px-4 py-2 border border-slate-200 shadow-sm">
                   <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
                   <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Phase 1 — Foundation</span>
@@ -163,46 +199,21 @@ const iconPath = (name: string) => {
                   We map your needs, define objectives, and create your custom roadmap — clear, measurable, and ready to execute.
                 </p>
 
-                <!-- Mini feature cards (more UI, less bland list) -->
                 <div class="grid gap-3">
-                  <div class="group rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
-                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
-                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
-                        1
-                      </span>
-                      <div class="md:text-right">
-                        <div class="font-extrabold text-slate-800">Requirements gathering</div>
-                        <div class="text-sm text-slate-600">Scope, roles, target markets, and success criteria.</div>
-                      </div>
-                    </div>
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4">
+                    <div class="font-extrabold text-slate-800">Requirements gathering</div>
+                    <div class="text-sm text-slate-600">Scope, roles, target markets, and success criteria.</div>
                   </div>
-
-                  <div class="group rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
-                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
-                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
-                        2
-                      </span>
-                      <div class="md:text-right">
-                        <div class="font-extrabold text-slate-800">Initial consultation</div>
-                        <div class="text-sm text-slate-600">Align expectations + define the action plan.</div>
-                      </div>
-                    </div>
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4">
+                    <div class="font-extrabold text-slate-800">Initial consultation</div>
+                    <div class="text-sm text-slate-600">Align expectations + define the action plan.</div>
                   </div>
-
-                  <div class="group rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
-                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
-                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
-                        3
-                      </span>
-                      <div class="md:text-right">
-                        <div class="font-extrabold text-slate-800">Timeline & budget planning</div>
-                        <div class="text-sm text-slate-600">Milestones, approvals, and delivery dates.</div>
-                      </div>
-                    </div>
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4">
+                    <div class="font-extrabold text-slate-800">Timeline planning</div>
+                    <div class="text-sm text-slate-600">Milestones, approvals, and delivery dates.</div>
                   </div>
                 </div>
 
-                <!-- Bottom micro CTA -->
                 <div class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy">
                   <span class="h-1.5 w-1.5 rounded-full bg-brand-gold"></span>
                   You get a clear plan before we move forward.
@@ -212,19 +223,17 @@ const iconPath = (name: string) => {
           </div>
         </div>
 
-        <!-- STEP 2 - HERO CARD with BRAND-NAVY -->
+        <!-- STEP 2 -->
         <div class="relative">
           <div class="grid md:grid-cols-2 items-center gap-10 md:gap-12">
-            <!-- CARD (left side on desktop) - BRAND NAVY BACKGROUND -->
+            <!-- CARD (left side) -->
             <div class="relative order-1 md:order-1 md:pr-12 md:flex md:justify-end">
-              <!-- directional arrow -->
               <div class="absolute right-0 top-1/2 hidden md:flex -translate-y-1/2 translate-x-1/2 w-8 h-8 bg-white rounded-full border-2 border-brand-navy items-center justify-center">
                 <svg class="w-4 h-4 text-brand-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
                 </svg>
               </div>
 
-              <!-- milestone marker -->
               <div class="absolute right-0 top-1/2 hidden md:block translate-x-1/2 -translate-y-1/2 z-10">
                 <div class="relative">
                   <div class="absolute -inset-4 rounded-full bg-brand-navy/20 animate-pulse"></div>
@@ -234,12 +243,8 @@ const iconPath = (name: string) => {
 
               <a href={`${BASE}services/${topServices[1].slug}/`} class="group block no-underline w-full max-w-[420px] lg:max-w-[440px]">
                 <div
-                  class="relative w-full
-                  rounded-2xl bg-brand-navy
-                  border-l-8 border-brand-gold
-                  shadow-2xl
-                  transition-all duration-500
-                  hover:-translate-y-2 hover:shadow-3xl
+                  class="relative w-full rounded-2xl bg-brand-navy border-l-8 border-brand-gold shadow-2xl
+                  transition-all duration-500 hover:-translate-y-2 hover:shadow-3xl
                   rotate-[2.5deg] hover:rotate-[0deg]"
                 >
                   <div class="absolute -top-4 -left-4">
@@ -256,30 +261,17 @@ const iconPath = (name: string) => {
                         </svg>
                       </div>
                       <div>
-                        <div class="text-xs font-bold uppercase tracking-wider text-brand-gold">
-                          Step 02
-                        </div>
-                        <h4 class="text-xl font-extrabold text-white">
-                          {topServices[1].title}
-                        </h4>
+                        <div class="text-xs font-bold uppercase tracking-wider text-brand-gold">Step 02</div>
+                        <h4 class="text-xl font-extrabold text-white">{topServices[1].title}</h4>
                       </div>
                     </div>
 
-                    <p class="text-slate-200 leading-relaxed mb-4">
-                      {topServices[1].short}
-                    </p>
+                    <p class="text-slate-200 leading-relaxed mb-4">{topServices[1].short}</p>
 
-                    <!-- Feature pills in navy card -->
                     <div class="flex flex-wrap gap-2 mb-5">
-                      <span class="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/20">
-                        Legal compliance
-                      </span>
-                      <span class="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/20">
-                        Document verification
-                      </span>
-                      <span class="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-white border border-white/20">
-                        Audit ready
-                      </span>
+                      <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20">Legal compliance</span>
+                      <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20">Verification</span>
+                      <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-medium text-white border border-white/20">Audit ready</span>
                     </div>
 
                     <div class="mt-6 flex items-center justify-start">
@@ -295,10 +287,9 @@ const iconPath = (name: string) => {
               </a>
             </div>
 
-            <!-- DESCRIPTION (right side on desktop) — UI UPGRADE -->
+            <!-- DESCRIPTION -->
             <div class="order-2 md:order-2 md:pl-14">
               <div class="max-w-md">
-                <!-- Top pill -->
                 <div class="inline-flex items-center gap-2 mb-4 rounded-full bg-white/90 backdrop-blur px-4 py-2 border border-slate-200 shadow-sm">
                   <span class="h-2 w-2 rounded-full bg-brand-navy"></span>
                   <span class="text-xs font-extrabold uppercase tracking-wider text-brand-navy">Phase 2 — Compliance</span>
@@ -313,46 +304,21 @@ const iconPath = (name: string) => {
                   Critical compliance checks and documentation that ensures zero-risk deployment — accurate, complete, and audited.
                 </p>
 
-                <!-- Mini feature cards -->
                 <div class="grid gap-3">
-                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
-                    <div class="flex items-start gap-3">
-                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-navy/10 text-brand-navy font-black">
-                        ✓
-                      </span>
-                      <div>
-                        <div class="font-extrabold text-slate-800">Legal & regulatory compliance</div>
-                        <div class="text-sm text-slate-600">We validate every requirement for your destination country.</div>
-                      </div>
-                    </div>
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4">
+                    <div class="font-extrabold text-slate-800">Legal compliance</div>
+                    <div class="text-sm text-slate-600">We validate every requirement for your destination country.</div>
                   </div>
-
-                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
-                    <div class="flex items-start gap-3">
-                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-navy/10 text-brand-navy font-black">
-                        ✓
-                      </span>
-                      <div>
-                        <div class="font-extrabold text-slate-800">Document verification & audit</div>
-                        <div class="text-sm text-slate-600">Everything is checked, logged, and prepared for inspection.</div>
-                      </div>
-                    </div>
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4">
+                    <div class="font-extrabold text-slate-800">Document verification</div>
+                    <div class="text-sm text-slate-600">Everything is checked, logged, and prepared for inspection.</div>
                   </div>
-
-                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
-                    <div class="flex items-start gap-3">
-                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-navy/10 text-brand-navy font-black">
-                        ✓
-                      </span>
-                      <div>
-                        <div class="font-extrabold text-slate-800">Risk assessment & mitigation</div>
-                        <div class="text-sm text-slate-600">We reduce delays by handling issues before submission.</div>
-                      </div>
-                    </div>
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4">
+                    <div class="font-extrabold text-slate-800">Risk mitigation</div>
+                    <div class="text-sm text-slate-600">We reduce delays by handling issues before submission.</div>
                   </div>
                 </div>
 
-                <!-- Bottom micro CTA -->
                 <div class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy">
                   <span class="h-1.5 w-1.5 rounded-full bg-brand-navy"></span>
                   This step protects the entire journey.
@@ -365,16 +331,14 @@ const iconPath = (name: string) => {
         <!-- STEP 3 -->
         <div class="relative">
           <div class="grid md:grid-cols-2 items-center gap-10 md:gap-12">
-            <!-- CARD (right side on desktop) -->
+            <!-- CARD (right side) -->
             <div class="relative order-1 md:order-2 md:pl-12">
-              <!-- directional arrow -->
               <div class="absolute left-0 top-1/2 hidden md:flex -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full border-2 border-brand-gold items-center justify-center">
                 <svg class="w-4 h-4 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
                 </svg>
               </div>
 
-              <!-- milestone marker -->
               <div class="absolute left-0 top-1/2 hidden md:block -translate-x-1/2 -translate-y-1/2 z-10">
                 <div class="relative">
                   <div class="absolute -inset-4 rounded-full bg-brand-gold/20 animate-pulse"></div>
@@ -385,11 +349,8 @@ const iconPath = (name: string) => {
               <a href={`${BASE}services/${topServices[2].slug}/`} class="group block no-underline">
                 <div
                   class="relative w-full max-w-[420px] lg:max-w-[440px] mx-auto md:mx-0
-                  rounded-2xl bg-white
-                  border-l-8 border-brand-gold
-                  shadow-xl
-                  transition-all duration-500
-                  hover:-translate-y-2 hover:shadow-2xl
+                  rounded-2xl bg-white border-l-8 border-brand-gold shadow-xl
+                  transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl
                   rotate-[-2deg] hover:rotate-[0deg]"
                 >
                   <div class="absolute -top-4 -right-4">
@@ -406,12 +367,8 @@ const iconPath = (name: string) => {
                         </svg>
                       </div>
                       <div>
-                        <div class="text-xs font-bold uppercase tracking-wider text-brand-gold">
-                          Step 03
-                        </div>
-                        <h4 class="text-xl font-extrabold text-brand-navy">
-                          {topServices[2].title}
-                        </h4>
+                        <div class="text-xs font-bold uppercase tracking-wider text-brand-gold">Step 03</div>
+                        <h4 class="text-xl font-extrabold text-brand-navy">{topServices[2].title}</h4>
                       </div>
                     </div>
 
@@ -430,10 +387,9 @@ const iconPath = (name: string) => {
               </a>
             </div>
 
-            <!-- DESCRIPTION (left side on desktop) — UI UPGRADE -->
+            <!-- DESCRIPTION -->
             <div class="order-2 md:order-1 md:pr-14 md:text-right">
               <div class="max-w-md ml-auto">
-                <!-- Top pill -->
                 <div class="inline-flex items-center gap-2 mb-4 rounded-full bg-white/90 backdrop-blur px-4 py-2 border border-slate-200 shadow-sm">
                   <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
                   <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Phase 3 — Delivery</span>
@@ -448,46 +404,21 @@ const iconPath = (name: string) => {
                   Full deployment support with follow-ups, assistance, and continuous optimization — so outcomes stay strong.
                 </p>
 
-                <!-- Mini feature cards -->
                 <div class="grid gap-3">
-                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
-                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
-                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
-                        24
-                      </span>
-                      <div class="md:text-right">
-                        <div class="font-extrabold text-slate-800">24/7 dedicated support</div>
-                        <div class="text-sm text-slate-600">Always available when issues appear.</div>
-                      </div>
-                    </div>
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4">
+                    <div class="font-extrabold text-slate-800">24/7 dedicated support</div>
+                    <div class="text-sm text-slate-600">Always available when issues appear.</div>
                   </div>
-
-                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
-                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
-                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
-                        ↗
-                      </span>
-                      <div class="md:text-right">
-                        <div class="font-extrabold text-slate-800">Deployment assistance</div>
-                        <div class="text-sm text-slate-600">Onboarding, arrival support, and coordination.</div>
-                      </div>
-                    </div>
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4">
+                    <div class="font-extrabold text-slate-800">Deployment assistance</div>
+                    <div class="text-sm text-slate-600">Onboarding, arrival support, and coordination.</div>
                   </div>
-
-                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4 hover:shadow-md transition">
-                    <div class="flex items-start gap-3 md:flex-row-reverse md:justify-start">
-                      <span class="mt-1 flex h-8 w-8 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold font-black">
-                        ✦
-                      </span>
-                      <div class="md:text-right">
-                        <div class="font-extrabold text-slate-800">Continuous optimization</div>
-                        <div class="text-sm text-slate-600">We improve the process based on feedback.</div>
-                      </div>
-                    </div>
+                  <div class="rounded-2xl bg-white border border-slate-200 shadow-sm p-4">
+                    <div class="font-extrabold text-slate-800">Optimization</div>
+                    <div class="text-sm text-slate-600">We improve the process based on feedback.</div>
                   </div>
                 </div>
 
-                <!-- Bottom micro CTA -->
                 <div class="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy">
                   <span class="h-1.5 w-1.5 rounded-full bg-brand-gold"></span>
                   We stay with you after delivery.
@@ -499,5 +430,6 @@ const iconPath = (name: string) => {
 
       </div>
     </div>
+
   </div>
 </section>
