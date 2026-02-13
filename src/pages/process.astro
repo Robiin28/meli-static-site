@@ -4,19 +4,58 @@ import PageHero from "../components/astro/PageHero.astro";
 import Card from "../components/astro/Card.astro";
 import FAQ from "../components/astro/FAQ.astro";
 
+const BASE = import.meta.env.BASE_URL;
+
 const faqItems = [
   {
     q: "How long does the recruitment process take?",
-    a: "Time depends on destination requirements and approvals. After reviewing your case, we provide an estimated timeline and checklist.",
+    a: "Timelines vary by destination, role, approvals, and employer readiness. After we review your request, we share an estimated timeline and a clear checklist of required documents.",
   },
   {
-    q: "Do you help with documentation?",
-    a: "Yes. We guide and manage the documentation workflow, including authentication and required submissions based on your destination.",
+    q: "Do you help with documentation and authentication?",
+    a: "Yes. We guide you through the full documentation workflow, including preparation, verification, and any required authentication steps based on destination rules.",
   },
   {
     q: "Do candidates need medical checks?",
-    a: "Often yes, depending on destination and job role. We guide candidates through the required medical process and readiness steps.",
+    a: "In many cases, yes—depending on the destination and job role. We coordinate the required medical steps and readiness briefing before travel.",
   },
+  {
+    q: "What do you need from us to start?",
+    a: "Just three items: destination country, job role/sector, and expected timeline. We’ll respond with the next steps and required documents.",
+  },
+];
+
+const steps = [
+  {
+    eyebrow: "Step 01",
+    title: "Request & Requirements",
+    text: "Share destination, job role, and timeline. We confirm requirements and provide a clear checklist.",
+  },
+  {
+    eyebrow: "Step 02",
+    title: "Documentation & Verification",
+    text: "We prepare candidate files, verify details, and organize documents for compliant processing.",
+  },
+  {
+    eyebrow: "Step 03",
+    title: "Approval, Screening & Medical",
+    text: "Interviews and readiness checks, plus approvals and medical steps when required by the destination.",
+  },
+  {
+    eyebrow: "Step 04",
+    title: "Travel, Briefing & Deployment",
+    text: "Final briefing, travel coordination, and deployment support to ensure smooth onboarding.",
+  },
+];
+
+const tags = [
+  { key: "intake", label: "intake" },
+  { key: "checklist", label: "checklist" },
+  { key: "verification", label: "verification" },
+  { key: "approval", label: "approval" },
+  { key: "screening", label: "screening" },
+  { key: "medical", label: "medical" },
+  { key: "deployment", label: "deployment" },
 ];
 ---
 
@@ -24,87 +63,166 @@ const faqItems = [
   <PageHero
     badge="Pipeline"
     title="Recruitment Process"
-    subtitle="Transparent steps designed to ensure compliance, safety, and successful deployment."
-    ctaHref="/contact"
+    subtitle="Transparent steps built for compliance, safety, and successful deployment—end to end."
+    ctaHref={`${BASE}contact/`}
     ctaLabel="Start a Request"
   />
 
-  <section class="bg-slate-50">
-    <div class="container mx-auto px-4 py-12 md:py-16 lg:py-20">
-      <!-- Steps -->
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        <Card
-          eyebrow="Step 01"
-          title="Contract & Documentation"
-          text="Confirm requirements, prepare candidate files, and organize documents for processing."
-        />
-        <Card
-          eyebrow="Step 02"
-          title="Authentication & Licensing"
-          text="Authorities review and authenticate documents for legal compliance and approvals."
-        />
-        <Card
-          eyebrow="Step 03"
-          title="Screening & Medical"
-          text="Interviews, verification, and readiness steps (including medical when required)."
-        />
-        <Card
-          eyebrow="Step 04"
-          title="Travel & Deployment"
-          text="Final briefing, travel coordination, and deployment support for smooth onboarding."
-        />
-      </div>
+  <section class="relative overflow-hidden bg-slate-50">
+    <!-- soft background accents -->
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-slate-50"></div>
+    <div class="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-gold/10 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-brand-navy/10 blur-3xl"></div>
 
-      <!-- Pipeline hint (keeps your original “code/pipeline” identity) -->
-      <div class="mt-10 md:mt-12 rounded-3xl bg-white p-7 md:p-10 ring-1 ring-slate-200 shadow-soft">
-        <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+    <div class="container relative mx-auto px-4 py-12 md:py-16 lg:py-20">
+      <!-- Intro strip -->
+      <div class="mb-8 rounded-3xl bg-white p-6 ring-1 ring-slate-200 shadow-soft md:mb-10 md:p-8">
+        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h2 class="text-xl font-extrabold text-slate-900">Pipeline view</h2>
-            <p class="mt-2 text-sm text-slate-600">
-              A quick look at typical steps we manage end-to-end.
+            <div class="inline-flex items-center gap-2 rounded-full bg-brand-navy/5 px-3 py-1 text-xs font-extrabold text-brand-navy ring-1 ring-slate-200">
+              <span class="h-2 w-2 rounded-full bg-brand-gold"></span>
+              How it works
+            </div>
+            <h2 class="mt-4 text-xl font-extrabold text-slate-900 md:text-2xl">
+              A clear, compliant workflow—no guesswork
+            </h2>
+            <p class="mt-2 max-w-3xl text-sm text-slate-600 md:text-base">
+              We align every step to destination requirements, candidate readiness, and legal compliance.
+              You’ll always know what’s next and what documents are needed.
             </p>
           </div>
 
           <div class="flex flex-wrap gap-2">
-            {["contract","auth","license","screen","medical","qr","travel"].map((t) => (
-              <span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-extrabold text-slate-700 ring-1 ring-slate-200">
-                {t}
+            <a
+              href={`${BASE}contact/`}
+              class="no-underline rounded-2xl bg-brand-gold px-5 py-3 text-sm font-extrabold text-slate-900 shadow-soft transition hover:-translate-y-0.5 hover:opacity-95 active:translate-y-0"
+            >
+              Request Checklist
+            </a>
+            <a
+              href={`${BASE}services/`}
+              class="no-underline rounded-2xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:-translate-y-0.5 hover:opacity-95 active:translate-y-0"
+            >
+              View Services
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s) => (
+          <div class="group transition hover:-translate-y-0.5">
+            <Card eyebrow={s.eyebrow} title={s.title} text={s.text} />
+          </div>
+        ))}
+      </div>
+
+      <!-- Pipeline view -->
+      <div class="mt-10 rounded-3xl bg-white p-7 ring-1 ring-slate-200 shadow-soft md:mt-12 md:p-10">
+        <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900">Pipeline view</h2>
+            <p class="mt-2 text-sm text-slate-600">
+              Typical stages we manage end-to-end (exact steps may vary by destination).
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            {tags.map((t) => (
+              <span
+                class="rounded-full bg-slate-100 px-3 py-1 text-xs font-extrabold text-slate-700 ring-1 ring-slate-200
+                       transition hover:bg-white hover:-translate-y-0.5 hover:shadow-sm"
+              >
+                {t.label}
               </span>
             ))}
+          </div>
+        </div>
+
+        <!-- mini progress bar -->
+        <div class="mt-6 overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-slate-200">
+          <div class="h-2 w-full bg-gradient-to-r from-brand-gold/70 via-brand-navy/60 to-brand-gold/70"></div>
+        </div>
+
+        <div class="mt-4 grid gap-3 text-sm text-slate-600 md:grid-cols-3">
+          <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+            <div class="text-xs font-extrabold text-slate-900">What you send</div>
+            <div class="mt-1">Destination • Role • Timeline</div>
+          </div>
+          <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+            <div class="text-xs font-extrabold text-slate-900">What we return</div>
+            <div class="mt-1">Checklist • Timeline • Next steps</div>
+          </div>
+          <div class="rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+            <div class="text-xs font-extrabold text-slate-900">What we manage</div>
+            <div class="mt-1">Compliance • Processing • Support</div>
           </div>
         </div>
       </div>
 
       <!-- FAQ -->
-      <div class="mt-10 md:mt-12 rounded-3xl bg-white p-7 md:p-10 ring-1 ring-slate-200 shadow-soft">
-        <h2 class="text-xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
-        <p class="mt-2 text-sm text-slate-600">
-          Quick answers to common questions about our recruitment workflow.
-        </p>
-        <FAQ items={faqItems} />
+      <div class="mt-10 rounded-3xl bg-white p-7 ring-1 ring-slate-200 shadow-soft md:mt-12 md:p-10">
+        <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+            <p class="mt-2 text-sm text-slate-600">
+              Quick answers about timelines, documents, and readiness.
+            </p>
+          </div>
+
+          <a
+            href={`${BASE}contact/`}
+            class="no-underline inline-flex items-center justify-center rounded-2xl bg-brand-navy/5 px-4 py-2 text-xs font-extrabold text-brand-navy ring-1 ring-slate-200
+                   transition hover:-translate-y-0.5 hover:bg-white hover:shadow-sm"
+          >
+            Ask a question →
+          </a>
+        </div>
+
+        <div class="mt-6">
+          <FAQ items={faqItems} />
+        </div>
       </div>
 
       <!-- CTA -->
-      <div class="mt-10 md:mt-12 rounded-3xl bg-brand-navy p-8 md:p-10 text-white shadow-soft">
-        <h3 class="text-xl md:text-2xl font-extrabold">
-          Want a checklist tailored to your destination?
-        </h3>
-        <p class="mt-3 max-w-2xl text-white/80">
-          Send destination + role + timeline. We’ll reply with required steps and documents.
-        </p>
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a
-            href="/contact"
-            class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95"
-          >
-            Contact Us
-          </a>
-          <a
-            href="/services"
-            class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 hover:bg-white/15"
-          >
-            Browse Services
-          </a>
+      <div class="mt-10 rounded-3xl bg-brand-navy p-8 text-white shadow-soft ring-1 ring-white/10 md:mt-12 md:p-10">
+        <div class="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+          <div>
+            <h3 class="text-xl font-extrabold md:text-2xl">
+              Want a destination-specific checklist?
+            </h3>
+            <p class="mt-3 max-w-2xl text-white/80">
+              Send destination + role + timeline. We’ll reply with required steps, document list, and an estimated schedule.
+            </p>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a
+                href={`${BASE}contact/`}
+                class="no-underline rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft transition
+                       hover:-translate-y-0.5 hover:opacity-95 active:translate-y-0"
+              >
+                Start a Request
+              </a>
+
+              <a
+                href={`${BASE}services/`}
+                class="no-underline rounded-2xl bg-white/10 px-6 py-3 font-semibold text-white ring-1 ring-white/25 transition
+                       hover:-translate-y-0.5 hover:bg-white/15 active:translate-y-0"
+              >
+                Browse Services
+              </a>
+            </div>
+          </div>
+
+          <div class="rounded-3xl bg-white/5 p-6 ring-1 ring-white/10">
+            <div class="text-xs font-extrabold text-white/90">To get started</div>
+            <ul class="mt-3 grid gap-2 text-sm text-white/80">
+              <li class="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">Destination country</li>
+              <li class="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">Job role / sector</li>
+              <li class="rounded-2xl bg-white/5 p-3 ring-1 ring-white/10">Timeline / urgency</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

@@ -41,21 +41,23 @@ const Image5 = `${BASE}assets/section/image5.png`;
           We keep the process clear and structured so employers and candidates always know the next step.
         </p>
 
-        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
-          <button
-            type="button"
-            class="transform rounded-lg bg-brand-navy px-8 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
-          >
-            Get Started
-          </button>
+      <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+                  <!-- Get Started → Contact -->
+                  <a
+                    href={`${BASE}contact/`}
+                    class="no-underline transform rounded-lg bg-brand-navy px-8 py-3 font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold inline-flex items-center justify-center"
+                  >
+                    Get Started
+                  </a>
 
-          <button
-            type="button"
-            class="rounded-lg border-2 border-brand-navy/20 px-8 py-3 font-semibold text-brand-navy transition-all duration-300 hover:border-brand-gold hover:text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
-          >
-            Learn More
-          </button>
-        </div>
+                  <!-- Learn More → Services or Process -->
+                  <a
+                    href={`${BASE}services/`}
+                    class="no-underline rounded-lg border-2 border-brand-navy/20 px-8 py-3 font-semibold text-brand-navy transition-all duration-300 hover:border-brand-gold hover:text-brand-navy focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold inline-flex items-center justify-center"
+                  >
+                    Learn More
+                  </a>
+      </div>
       </div>
 
       <!-- Hero Image -->
@@ -156,12 +158,12 @@ const Image5 = `${BASE}assets/section/image5.png`;
         Join hundreds of companies who trust our three-pillar approach for successful global placements.
       </p>
 
-      <button
-        type="button"
-        class="transform rounded-xl bg-brand-navy px-10 py-4 font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
-      >
-        Start Your Journey Today
-      </button>
+     <a
+  href={`${BASE}contact/`}
+  class="no-underline inline-flex items-center justify-center transform rounded-xl bg-brand-navy px-10 py-4 font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+>
+  Start Your Journey Today
+</a>
     </div>
   </div>
 </section>

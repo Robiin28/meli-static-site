@@ -2,7 +2,12 @@
 const { label = "", value = "" } = Astro.props;
 ---
 
-<div class="rounded-2xl bg-white p-6 shadow-soft ring-1 ring-slate-200">
-  <div class="text-3xl font-extrabold tracking-tight text-slate-900">{value}</div>
-  <div class="mt-2 text-sm font-semibold text-slate-600">{label}</div>
+<div class="flex h-full flex-col justify-center">
+  <div class="text-lg font-extrabold tracking-wide text-brand-navy">
+    {value}
+  </div>
+
+  <div class="mt-2 text-sm leading-relaxed text-slate-600">
+    {label}
+  </div>
 </div>

@@ -1,11 +1,25 @@
-<form class="grid gap-4">
+---
+/**
+ * File: src/components/astro/ContactForm.astro
+ * Purpose: Contact form (Formspree) + layout-safe inputs
+ */
+const FORMSPREE_ACTION = "https://formspree.io/f/mykdeney";
+---
+
+<form
+  id="contactForm"
+  class="grid w-full max-w-full gap-4 overflow-hidden"
+  action={FORMSPREE_ACTION}
+  method="POST"
+>
   <div class="grid gap-2">
     <label class="text-sm font-extrabold text-slate-800" for="name">Full Name</label>
     <input
       id="name"
       name="name"
       required
-      class="h-11 rounded-xl border border-slate-200 bg-white px-3 outline-none focus:ring-2 focus:ring-brand-navy/20"
+      autocomplete="name"
+      class="h-11 w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3 outline-none focus:ring-2 focus:ring-brand-navy/20"
       placeholder="Your name"
     />
   </div>
@@ -17,7 +31,8 @@
       name="email"
       type="email"
       required
-      class="h-11 rounded-xl border border-slate-200 bg-white px-3 outline-none focus:ring-2 focus:ring-brand-navy/20"
+      autocomplete="email"
+      class="h-11 w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3 outline-none focus:ring-2 focus:ring-brand-navy/20"
       placeholder="you@example.com"
     />
   </div>
@@ -27,7 +42,7 @@
     <input
       id="subject"
       name="subject"
-      class="h-11 rounded-xl border border-slate-200 bg-white px-3 outline-none focus:ring-2 focus:ring-brand-navy/20"
+      class="h-11 w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3 outline-none focus:ring-2 focus:ring-brand-navy/20"
       placeholder="Recruitment / Employer Request / Support"
     />
   </div>
@@ -39,19 +54,65 @@
       name="message"
       rows="5"
       required
-      class="rounded-xl border border-slate-200 bg-white p-3 outline-none focus:ring-2 focus:ring-brand-navy/20"
+      class="w-full min-w-0 resize-y rounded-xl border border-slate-200 bg-white p-3 outline-none focus:ring-2 focus:ring-brand-navy/20"
       placeholder="Tell us what you need..."
-    />
+    ></textarea>
   </div>
 
+  <!-- Helpful extras -->
+  <input type="hidden" name="_subject" value="New message from MELI website" />
+  <input type="text" name="_gotcha" class="hidden" tabindex="-1" autocomplete="off" />
+
   <button
+    id="submitBtn"
     type="submit"
-    class="rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95"
+    class="w-full rounded-2xl bg-brand-gold px-6 py-3 font-extrabold text-slate-900 shadow-soft hover:opacity-95 disabled:opacity-60 disabled:cursor-not-allowed"
   >
     Send Message
   </button>
 
-  <p class="text-xs text-slate-500">
-    This form is currently static. Connect it to Formspree, Netlify Forms, or a custom API when ready.
-  </p>
+  <p id="formStatus" class="text-xs text-slate-500"></p>
 </form>
+
+<!-- ✅ Keep user on the same page + show success text -->
+<script is:inline>
+  const form = document.getElementById("contactForm");
+  const btn = document.getElementById("submitBtn");
+  const statusEl = document.getElementById("formStatus");
+
+  if (form && btn && statusEl) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = "Sending...";
+      statusEl.textContent = "";
+
+      try {
+        const res = await fetch(form.action, {
+          method: form.method,
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (res.ok) {
+          form.reset();
+          btn.textContent = "Sent ✓";
+          statusEl.textContent = "Thanks! Your message has been sent.";
+        } else {
+          btn.textContent = "Try again";
+          statusEl.textContent = "Sorry — something went wrong. Please try again.";
+        }
+      } catch (err) {
+        btn.textContent = "Try again";
+        statusEl.textContent = "Network error — please check your connection and retry.";
+      } finally {
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = original;
+        }, 1600);
+      }
+    });
+  }
+</script>
