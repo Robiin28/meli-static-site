@@ -28,20 +28,21 @@ const pageDesc =
 
     <title>{pageTitle}</title>
 
-    <!-- ✅ Enables smooth SPA-like navigation -->
+    <!-- ✅ Correct favicon path -->
+    <link rel="icon" type="image/png" href="/assets/brand/logoo.png" />
+    <link rel="apple-touch-icon" href="/assets/brand/logoo.png" />
+    <meta name="theme-color" content="#0f172a" />
+
     <ViewTransitions />
   </head>
 
   <body class="min-h-screen bg-white text-slate-900">
-    <!-- ✅ Persistent header: no logo reload -->
     <Nav transition:persist="site-nav" />
 
-    <!-- Page content transitions smoothly -->
     <main class="relative">
       <slot />
     </main>
 
-    <!-- Optional: also persist footer -->
     <Footer transition:persist="site-footer" />
   </body>
 </html>
