@@ -1,10 +1,10 @@
-
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 
 export default defineConfig({
-  base: "/meli-static-site/",
+  site: "https://meliagencyet.com",
+  base: "/",
   trailingSlash: "always",
   integrations: [react()],
   vite: {
