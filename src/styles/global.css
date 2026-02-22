@@ -10,9 +10,21 @@
   --page-muted: 71 85 105;
 }
 html,
-body {
+html, body {
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden; /* prevents page bounce */
+}
+
+/* Allow scrolling only inside main content */
+body > * {
+  height: 100%;
+}
+
+main {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling */
+}
 }
 
 body {
