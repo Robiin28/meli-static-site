@@ -11,22 +11,11 @@
 }
 html,
 body {
-  height: 100%;
-  overflow: hidden; /* prevents page bounce */
-}
-
-/* Allow scrolling only inside main content */
-body > * {
-  height: 100%;
-}
-
-main {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; /* smooth scrolling */
+  min-height: 100%;
 }
 
 body {
+  overflow-x: hidden;
   background: rgb(var(--page-bg));
   color: rgb(var(--page-ink));
 }
