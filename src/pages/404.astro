@@ -1,8 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const BASE = import.meta.env.BASE_URL || "/";
 ---
 
-<BaseLayout title="404" description="Page not found.">
+<BaseLayout title="404" description="Page not found." noindex={true}>
   <section class="bg-slate-50">
     <div class="container mx-auto px-4 py-14 md:py-16 lg:py-24">
       <div class="mx-auto max-w-2xl rounded-3xl bg-white p-8 md:p-10 shadow-soft ring-1 ring-slate-200 text-center">
@@ -19,16 +21,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
 
         <div class="mt-8 grid gap-3 sm:grid-cols-2">
-          <a class="no-underline rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200" href="/">
+          <a class="no-underline rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200" href={BASE}>
             Home
           </a>
-          <a class="no-underline rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200" href="/services">
+          <a class="no-underline rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200" href={`${BASE}services/`}>
             Services
           </a>
-          <a class="no-underline rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200" href="/process">
+          <a class="no-underline rounded-2xl bg-slate-100 px-5 py-3 font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-200" href={`${BASE}process/`}>
             Process
           </a>
-          <a class="no-underline rounded-2xl bg-brand-navy px-5 py-3 font-extrabold text-white hover:opacity-95" href="/contact">
+          <a class="no-underline rounded-2xl bg-brand-navy px-5 py-3 font-extrabold text-white hover:opacity-95" href={`${BASE}contact/`}>
             Contact
           </a>
         </div>

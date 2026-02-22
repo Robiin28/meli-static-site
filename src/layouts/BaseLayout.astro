@@ -4,7 +4,21 @@ import Nav from "../components/astro/Nav.astro";
 import Footer from "../components/astro/Footer.astro";
 import { ViewTransitions } from "astro:transitions";
 
-const { title, description } = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  type?: "website" | "article";
+}
+
+const {
+  title,
+  description,
+  image = "/assets/brand/logoo.png",
+  noindex = false,
+  type = "website",
+} = Astro.props as Props;
 
 const pageTitle = title
   ? `${title} | Meli Private Employment Agency`
@@ -13,6 +27,30 @@ const pageTitle = title
 const pageDesc =
   description ??
   "Meli Private Employment Agency provides foreign employment and recruitment services across multiple sectors.";
+
+const siteUrl = Astro.site ?? new URL("https://meliagencyet.com");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const ogImageUrl = image.startsWith("http")
+  ? image
+  : new URL(image, siteUrl).toString();
+const robotsContent = noindex ? "noindex, nofollow" : "index, follow";
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "EmploymentAgency",
+  name: "Meli Private Employment Agency",
+  alternateName: "Meli Employment Ethiopia",
+  url: siteUrl.toString(),
+  logo: new URL("/assets/brand/logoo.png", siteUrl).toString(),
+  description: pageDesc,
+  email: "meliemploy@gmail.com",
+  telephone: ["+251966389017", "+251920607879"],
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Addis Ababa",
+    addressCountry: "ET",
+  },
+  areaServed: ["Ethiopia", "Jordan", "Kuwait", "Saudi Arabia", "Lebanon"],
+};
 ---
 
 <!doctype html>
@@ -21,14 +59,28 @@ const pageDesc =
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={pageDesc} />
+    <meta name="robots" content={robotsContent} />
+    <link rel="canonical" href={canonicalUrl} />
 
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDesc} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content="Meli Private Employment Agency" />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationJsonLd)}
+    />
 
     <title>{pageTitle}</title>
 
-    <!-- ✅ Correct favicon path -->
     <link rel="icon" type="image/png" href="/assets/brand/logoo.png" />
     <link rel="apple-touch-icon" href="/assets/brand/logoo.png" />
     <meta name="theme-color" content="#0f172a" />

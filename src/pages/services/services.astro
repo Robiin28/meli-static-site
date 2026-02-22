@@ -1,8 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const BASE = import.meta.env.BASE_URL || "/";
 ---
 
-<BaseLayout title="All Services" description="Service overview page.">
+<BaseLayout title="All Services" description="Service overview page." noindex={true}>
   <section class="bg-white">
     <div class="container mx-auto px-4 py-24 max-w-3xl">
       <h1 class="text-3xl font-extrabold text-slate-900">
@@ -23,7 +25,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
       <div class="mt-8">
         <a
-          href="/services"
+          href={`${BASE}services/`}
           class="no-underline inline-block rounded-2xl bg-brand-navy px-6 py-3 font-semibold text-white hover:opacity-95"
         >
           Go to main Services page

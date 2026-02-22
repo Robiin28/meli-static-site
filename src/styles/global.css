@@ -10,7 +10,7 @@
   --page-muted: 71 85 105;
 }
 html,
-html, body {
+body {
   height: 100%;
   overflow: hidden; /* prevents page bounce */
 }
@@ -24,7 +24,6 @@ main {
   height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* smooth scrolling */
-}
 }
 
 body {
