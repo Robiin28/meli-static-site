@@ -9,6 +9,11 @@
   --page-ink: 2 6 23;
   --page-muted: 71 85 105;
 }
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
 
 body {
   background: rgb(var(--page-bg));
