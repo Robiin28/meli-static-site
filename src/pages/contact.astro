@@ -2,8 +2,10 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactForm from "../components/astro/ContactForm.astro";
 
-const MAP_EMBED =
-  "https://www.google.com/maps?q=LQpzHN7Ze8xwjVkA8&output=embed";
+// ✅ Real map based on location (use place/address/coords, not goo.gl ID)
+const MAP_QUERY = "Meli Private Employment Agency, Addis Ababa, Ethiopia";
+const MAP_EMBED = `https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&output=embed`;
+const MAP_DIRECTIONS = `https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}`;
 
 const EMAIL = "meliemploy@gmail.com";
 const PHONE = "+251 966 389 017";
@@ -73,7 +75,7 @@ const OFFICE = "Addis Ababa, Ethiopia";
             <a
               class="rounded-full bg-brand-gold/15 px-4 py-2 text-xs font-extrabold text-slate-900 ring-1 ring-black/5
                      transition hover:bg-brand-gold/25 hover:-translate-y-0.5 active:translate-y-0"
-              href="https://www.google.com/maps?q=Meli%20Private%20Employment%20Agency%20Addis%20Ababa"
+              href={MAP_DIRECTIONS}
               target="_blank"
               rel="noreferrer"
             >
