@@ -14,7 +14,7 @@ export const posts = [
     content: `
 Saudi Arabia has introduced additional credentialing steps for nursing applicants to improve verification and reduce document delays. If you are applying through a licensed agency, the process is smoother—but you still need to prepare the right documents early.
 
-## What changed in 2025
+## What changed in 2026
 - Digital verification is emphasized more than before.
 - Credential checks can happen **before** your final contract timeline.
 - Some steps are now sequential (you must finish step A before moving to step B).
